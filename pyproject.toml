@@ -1,0 +1,17 @@
+[project]
+name = "advent-of-code"
+version = "0.1.0"
+description = "My solutions to all years of Advent of Code in Python"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "mypy>=1.12.0",
+    "pytest>=8.3.3",
+    "ruff>=0.6.9",
+]
+
+# see: https://docs.pytest.org/en/stable/reference/customize.html
+[tool.pytest.ini_options]
+python_files = "*.py" # find tests in solution files
+testpaths = ["solutions"] # only traverse the solutions directory
