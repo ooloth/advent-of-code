@@ -17,5 +17,6 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
+    # TODO: how does templating work? how to interpolate values?
     with open("inputs/{day}.txt") as f:
         print(solution(f.read().strip()))
