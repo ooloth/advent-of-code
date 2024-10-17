@@ -1,4 +1,4 @@
-# TODO: inline the instructions at the top of the solution file?
+from pathlib import Path
 
 
 def solution(input: str) -> int:
@@ -17,6 +17,7 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    # TODO: how does templating work? how to interpolate values?
-    with open("inputs/{day}.txt") as f:
-        print(solution(f.read().strip()))
+    puzzle_input_file = f"{Path(__file__).parent}/inputs/1.txt"
+    with open(puzzle_input_file) as f:
+        puzzle_input_string = f.read().strip()
+        print(solution(puzzle_input_string))
