@@ -1,3 +1,4 @@
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/templates/day_template.txt
 # TODO: inline the instructions at the top of the solution file?
 
 
