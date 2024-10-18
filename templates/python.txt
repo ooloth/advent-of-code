@@ -1,5 +1,9 @@
+# Advent of Code {year}, Day {day}, Part {part}
+# https://adventofcode.com/{year}/day/{day}
+
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/templates/day_template.txt
-# TODO: inline the instructions at the top of the solution file?
+
+from pathlib import Path
 
 
 def solution(input: str) -> int:
@@ -18,8 +22,9 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    # TODO: how does templating work? how to interpolate values?
-    puzzle_input = f"{Path(__file__).parent}/inputs/{day}.txt"
-    with open(puzzle_input) as f:
+    year_directory = Path(__file__).parent
+    puzzle_input_file = f"{year_directory}/inputs/{day}.txt"
+
+    with open(puzzle_input_file) as f:
         puzzle_input_string = f.read().strip()
         print(solution(puzzle_input_string))
