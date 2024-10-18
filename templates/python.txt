@@ -3,8 +3,6 @@
 
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/templates/day_template.txt
 
-from pathlib import Path
-
 
 def solution(input: str) -> int:
     return len(input)
@@ -22,9 +20,6 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    year_directory = Path(__file__).parent
-    puzzle_input_file = f"{year_directory}/inputs/{day}.txt"
+    from utils.py.template import get_puzzle_input
 
-    with open(puzzle_input_file) as f:
-        puzzle_input_string = f.read().strip()
-        print(solution(puzzle_input_string))
+    print(solution(get_puzzle_input({year}, {day})))
