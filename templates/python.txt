@@ -1,4 +1,4 @@
-# Advent of Code {year}, Day {day}, Part {part}
+# Advent of Code {year}: Day {day}, Part {part}
 # https://adventofcode.com/{year}/day/{day}
 
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/templates/day_template.txt

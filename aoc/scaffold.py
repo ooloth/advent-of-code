@@ -11,47 +11,77 @@ import argparse
 import subprocess
 from pathlib import Path
 
-cwd = Path(__file__).cwd()
-
-aoc_session_cookie_file = f"{cwd}/.aoc-session-cookie"
-python_template_path = f"{cwd}/templates/python.txt"
+aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
+python_template = Path("templates/python.txt").resolve()
 
 
-def download_puzzle_input(year: int, day: int) -> None:
-    input_file = f"{cwd}/solutions/{year}/inputs/{day}.txt"
+def download_puzzle_instructions(year: int, day: int) -> None:
+    rel_path = f"solutions/{year}/puzzles/{day}.md"
+    abs_path = Path(rel_path).resolve()
 
-    if Path(input_file).exists():
-        print(f"Puzzle input for day {day} of {year} already exists at {input_file}.")
+    if abs_path.exists():
+        print(f"Puzzle instructions already found at '{rel_path}'")
         return
 
     # Ensure the file's parent directories exist
-    Path(input_file).parent.mkdir(parents=True, exist_ok=True)
+    abs_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Save the puzzle input to the new file
-    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
-    command = f"aoc download --year {year} --day {day} --input-only --input-file {input_file} --session-file {aoc_session_cookie_file}"
+    # Save the puzzle puzzle to the new file
+    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+    command = f"aoc download --year {year} --day {day} --puzzle-only --puzzle-file {rel_path} --session-file {aoc_session_cookie_file}"
 
     try:
         subprocess.run(command.split(" "), check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Error downloading puzzle input: {e}")
+        print(f"Error downloading puzzle: {e}")
+        exit(1)
+
+
+def download_puzzle_input(year: int, day: int) -> None:
+    rel_path = f"solutions/{year}/inputs/{day}.txt"
+    abs_path = Path(rel_path).resolve()
+
+    if abs_path.exists():
+        print(f"Puzzle input already found at '{rel_path}'")
+        return
+
+    # Ensure the file's parent directories exist
+    abs_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Save the puzzle input to the new file
+    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
+    command = f"aoc download --year {year} --day {day} --input-only --input-file {rel_path} --session-file {aoc_session_cookie_file}"
+
+    try:
+        subprocess.run(command.split(" "), check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error downloading input: {e}")
         exit(1)
 
 
 # TODO: repeat for rust and ts
 def create_solution_file(year: int, day: int, part: int) -> None:
-    with open(python_template_path, "r") as file:
+    with open(python_template, "r") as file:
         content = file.read()
 
     content = content.replace("{year}", str(year))
     content = content.replace("{day}", str(day))
     content = content.replace("{part}", str(part))
 
-    output_file_path = f"{cwd}/solutions/{year}/{day}{'a' if part == 1 else 'b'}.py"
-    with open(output_file_path, "w") as file:
+    rel_path = f"solutions/{year}/{day}{'a' if part == 1 else 'b'}.py"
+    abs_path = Path(rel_path).resolve()
+
+    if abs_path.exists():
+        print(f"Puzzle solution already found at '{rel_path}'")
+        return
+
+    # Ensure the file's parent directories exist
+    abs_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(abs_path, "w") as file:
         file.write(content)
 
-    print(f"Solution file created at {output_file_path}")
+    print(f"Puzzle solution file created at {rel_path}")
 
 
 def main() -> None:
@@ -71,6 +101,7 @@ def main() -> None:
     if args.part not in [1, 2]:
         raise ValueError("Part must be 1 or 2.")
 
+    download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
     create_solution_file(args.year, args.day, args.part)
 
