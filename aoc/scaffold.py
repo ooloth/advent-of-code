@@ -1,9 +1,13 @@
+# TODO: https://github.com/wimglenn/advent-of-code-data
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/get_inputs.py
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
 # TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
 # TODO: https://github.com/AlexeSimon/adventofcode/blob/master/init.py
 # TODO: https://github.com/Bogdanp/awesome-advent-of-code?tab=readme-ov-file#python
+# TODO: https://chatgpt.com/c/670df45e-5354-800a-a1f9-d2be7d49f4ca
+# TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
+
 
 import argparse
 import subprocess
@@ -98,7 +102,6 @@ class Template:
     extension: str
 
 
-# TODO: repeat for rust and ts
 def create_solution_files(year: int, day: int, part: int) -> None:
     templates = [
         Template(path="templates/python.txt", extension="py"),
@@ -110,7 +113,7 @@ def create_solution_files(year: int, day: int, part: int) -> None:
         abs_path = Path(template.path).resolve()
 
         if not abs_path.exists():
-            print(f"No template file found at '{template.path}'")
+            print(f"No template found at '{template.path}'")
             continue
 
         with open(abs_path, "r") as file:
