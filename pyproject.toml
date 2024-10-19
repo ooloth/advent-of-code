@@ -18,3 +18,6 @@ testpaths = ["solutions"] # only traverse the solutions directory
 extend-select = [
   "I" # enable isort rules in the CLI (see: https://github.com/astral-sh/ruff-vscode?tab=readme-ov-file#configuring-vs-code)
 ]
+unfixable = [
+  "F401" # don't delete unused imports while fixing lint errors on save
+]
