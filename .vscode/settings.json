@@ -14,4 +14,8 @@
   "files.associations": {
     ".aoc-session-cookie": "plaintext"
   },
+  "search.exclude": {
+    "**/.venv": true
+  },
+  "search.useIgnoreFiles": false, // support searching for input and puzzle files (which aren't tracked)
 }
