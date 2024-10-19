@@ -4,8 +4,6 @@
 # TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
 # TODO: https://github.com/AlexeSimon/adventofcode/blob/master/init.py
 # TODO: https://github.com/Bogdanp/awesome-advent-of-code?tab=readme-ov-file#python
-# TODO: download puzzle instructions for year-day-part (e.g. "instructions/1.py"). Or prepend to solution file as a comment?
-# TODO: don't redownload files if they already exist
 
 import argparse
 import subprocess
@@ -15,12 +13,45 @@ from pathlib import Path
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
 
+# def download_puzzle_data(
+#     year: int,
+#     day: int,
+#     data_type: str,
+#     session_file: Path = aoc_session_cookie_file,
+# ) -> None:
+#     if data_type not in ["puzzle", "input"]:
+#         raise ValueError("data_type must be either 'puzzle' or 'input'")
+
+#     file_extension = "md" if data_type == "puzzle" else "txt"
+#     rel_path = f"solutions/{year}/{data_type}s/{day}.{file_extension}"
+#     abs_path = Path(rel_path).resolve()
+
+#     if abs_path.exists():
+#         print(
+#             f"🎅 Puzzle{f" {data_type}" if data_type == "input" else ""} found at '{rel_path}'"
+#         )
+#         return
+
+#     # Ensure the file's parent directories exist
+#     abs_path.parent.mkdir(parents=True, exist_ok=True)
+
+#     # Construct the command based on the data type
+#     command = f"aoc download --year {year} --day {day} --{data_type}-only --{data_type}-file {rel_path} --session-file {session_file}"
+
+#     try:
+#         subprocess.run(command.split(" "), check=True)
+#         print(f"🎅 Saved {data_type} to '{rel_path}'")
+#     except subprocess.CalledProcessError as e:
+#         print(f"Error downloading {data_type}: {e}")
+#         exit(1)
+
+
 def download_puzzle_instructions(year: int, day: int) -> None:
     rel_path = f"solutions/{year}/puzzles/{day}.md"
     abs_path = Path(rel_path).resolve()
 
     if abs_path.exists():
-        print(f"Puzzle instructions already found at '{rel_path}'")
+        print(f"🎅 Found puzzle at '{rel_path}'")
         return
 
     # Ensure the file's parent directories exist
@@ -32,6 +63,7 @@ def download_puzzle_instructions(year: int, day: int) -> None:
 
     try:
         subprocess.run(command.split(" "), check=True)
+        print(f"🎅 Saved puzzle to '{rel_path}'")
     except subprocess.CalledProcessError as e:
         print(f"Error downloading puzzle: {e}")
         exit(1)
@@ -42,7 +74,7 @@ def download_puzzle_input(year: int, day: int) -> None:
     abs_path = Path(rel_path).resolve()
 
     if abs_path.exists():
-        print(f"Puzzle input found at '{rel_path}'")
+        print(f"🎅 Found input at '{rel_path}'")
         return
 
     # Ensure the file's parent directories exist
@@ -54,6 +86,7 @@ def download_puzzle_input(year: int, day: int) -> None:
 
     try:
         subprocess.run(command.split(" "), check=True)
+        print(f"🎅 Saved input to '{rel_path}'")
     except subprocess.CalledProcessError as e:
         print(f"Error downloading input: {e}")
         exit(1)
@@ -77,7 +110,7 @@ def create_solution_files(year: int, day: int, part: int) -> None:
         abs_path = Path(template.path).resolve()
 
         if not abs_path.exists():
-            print(f"Template file not found at '{template.path}'")
+            print(f"No template file found at '{template.path}'")
             continue
 
         with open(abs_path, "r") as file:
@@ -93,7 +126,7 @@ def create_solution_files(year: int, day: int, part: int) -> None:
         abs_path_to_solution = Path(rel_path_to_solution).resolve()
 
         if abs_path_to_solution.exists():
-            print(f"Puzzle solution found at '{rel_path_to_solution}'")
+            print(f"🎅 Found solution at '{rel_path_to_solution}'")
             continue
 
         # Ensure the file's parent directories exist
@@ -102,7 +135,7 @@ def create_solution_files(year: int, day: int, part: int) -> None:
         with open(abs_path_to_solution, "w") as file:
             file.write(content)
 
-        print(f"Puzzle solution file created at '{rel_path_to_solution}'")
+        print(f"🎅 Created solution file at '{rel_path_to_solution}'")
 
 
 def main() -> None:
@@ -122,8 +155,11 @@ def main() -> None:
     if args.part not in [1, 2]:
         raise ValueError("Part must be 1 or 2.")
 
+    # download_puzzle_data(args.year, args.day, "puzzle")
+    # download_puzzle_data(args.year, args.day, "input")
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
+
     create_solution_files(args.year, args.day, args.part)
 
 
