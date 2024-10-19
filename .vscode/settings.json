@@ -1,6 +1,5 @@
 {
   "[python]": {
-    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit"
@@ -11,4 +10,8 @@
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
   "deno.enable": true,
+  "editor.formatOnSave": true,
+  "files.associations": {
+    ".aoc-session-cookie": "plaintext"
+  },
 }
