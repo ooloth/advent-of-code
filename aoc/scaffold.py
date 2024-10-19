@@ -9,10 +9,10 @@
 
 import argparse
 import subprocess
+from dataclasses import dataclass
 from pathlib import Path
 
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
-python_template = Path("templates/python.txt").resolve()
 
 
 def download_puzzle_instructions(year: int, day: int) -> None:
@@ -42,7 +42,7 @@ def download_puzzle_input(year: int, day: int) -> None:
     abs_path = Path(rel_path).resolve()
 
     if abs_path.exists():
-        print(f"Puzzle input already found at '{rel_path}'")
+        print(f"Puzzle input found at '{rel_path}'")
         return
 
     # Ensure the file's parent directories exist
@@ -59,29 +59,50 @@ def download_puzzle_input(year: int, day: int) -> None:
         exit(1)
 
 
+@dataclass
+class Template:
+    path: str
+    extension: str
+
+
 # TODO: repeat for rust and ts
-def create_solution_file(year: int, day: int, part: int) -> None:
-    with open(python_template, "r") as file:
-        content = file.read()
+def create_solution_files(year: int, day: int, part: int) -> None:
+    templates = [
+        Template(path="templates/python.txt", extension="py"),
+        Template(path="templates/rust.txt", extension="rs"),
+        Template(path="templates/typescript.txt", extension="ts"),
+    ]
 
-    content = content.replace("{year}", str(year))
-    content = content.replace("{day}", str(day))
-    content = content.replace("{part}", str(part))
+    for template in templates:
+        abs_path = Path(template.path).resolve()
 
-    rel_path = f"solutions/{year}/{day}{'a' if part == 1 else 'b'}.py"
-    abs_path = Path(rel_path).resolve()
+        if not abs_path.exists():
+            print(f"Template file not found at '{template.path}'")
+            continue
 
-    if abs_path.exists():
-        print(f"Puzzle solution already found at '{rel_path}'")
-        return
+        with open(abs_path, "r") as file:
+            content = file.read()
 
-    # Ensure the file's parent directories exist
-    abs_path.parent.mkdir(parents=True, exist_ok=True)
+        content = content.replace("{year}", str(year))
+        content = content.replace("{day}", str(day))
+        content = content.replace("{part}", str(part))
 
-    with open(abs_path, "w") as file:
-        file.write(content)
+        rel_path_to_solution = (
+            f"solutions/{year}/{day}{'a' if part == 1 else 'b'}.{template.extension}"
+        )
+        abs_path_to_solution = Path(rel_path_to_solution).resolve()
 
-    print(f"Puzzle solution file created at {rel_path}")
+        if abs_path_to_solution.exists():
+            print(f"Puzzle solution found at '{rel_path_to_solution}'")
+            continue
+
+        # Ensure the file's parent directories exist
+        abs_path_to_solution.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(abs_path_to_solution, "w") as file:
+            file.write(content)
+
+        print(f"Puzzle solution file created at '{rel_path_to_solution}'")
 
 
 def main() -> None:
@@ -103,7 +124,7 @@ def main() -> None:
 
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
-    create_solution_file(args.year, args.day, args.part)
+    create_solution_files(args.year, args.day, args.part)
 
 
 if __name__ == "__main__":
