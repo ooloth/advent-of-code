@@ -15,6 +15,7 @@ target/
 !**/inputs/.gitkeep
 **/puzzles/*
 !**/puzzles/.gitkeep
+.aoc-session-cookie
 
 # Dhat
 dhat-heap.json

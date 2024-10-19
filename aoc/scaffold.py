@@ -4,9 +4,6 @@
 # TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
 # TODO: https://github.com/AlexeSimon/adventofcode/blob/master/init.py
 # TODO: https://github.com/Bogdanp/awesome-advent-of-code?tab=readme-ov-file#python
-# TODO: generate solution file for year-day-part (e.g. "1a.py")
-# TODO: download puzzle input for year-day (e.g. "inputs/1.py")
-# TODO: download example input for year-day-part? (e.g. "examples/1a.py")? Skip this and just copy examples from instructions manually?
 # TODO: download puzzle instructions for year-day-part (e.g. "instructions/1.py"). Or prepend to solution file as a comment?
 # TODO: don't redownload files if they already exist
 
@@ -15,19 +12,33 @@ import subprocess
 from pathlib import Path
 
 cwd = Path(__file__).cwd()
+
+aoc_session_cookie_file = f"{cwd}/.aoc-session-cookie"
 python_template_path = f"{cwd}/templates/python.txt"
 
 
 def download_puzzle_input(year: int, day: int) -> None:
+    input_file = f"{cwd}/solutions/{year}/inputs/{day}.txt"
+
+    if Path(input_file).exists():
+        print(f"Puzzle input for day {day} of {year} already exists at {input_file}.")
+        return
+
+    # Ensure the file's parent directories exist
+    Path(input_file).parent.mkdir(parents=True, exist_ok=True)
+
+    # Save the puzzle input to the new file
+    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
+    command = f"aoc download --year {year} --day {day} --input-only --input-file {input_file} --session-file {aoc_session_cookie_file}"
+
     try:
-        subprocess.run(
-            ["aoc", "download", "--year", str(year), "--day", str(day)], check=True
-        )
+        subprocess.run(command.split(" "), check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error downloading puzzle input: {e}")
         exit(1)
 
 
+# TODO: repeat for rust and ts
 def create_solution_file(year: int, day: int, part: int) -> None:
     with open(python_template_path, "r") as file:
         content = file.read()
@@ -39,6 +50,8 @@ def create_solution_file(year: int, day: int, part: int) -> None:
     output_file_path = f"{cwd}/solutions/{year}/{day}{'a' if part == 1 else 'b'}.py"
     with open(output_file_path, "w") as file:
         file.write(content)
+
+    print(f"Solution file created at {output_file_path}")
 
 
 def main() -> None:
@@ -58,10 +71,7 @@ def main() -> None:
     if args.part not in [1, 2]:
         raise ValueError("Part must be 1 or 2.")
 
-    # Download the puzzle input
-    # download_puzzle_input(args.year, args.day)
-
-    # Generate solution file from template
+    download_puzzle_input(args.year, args.day)
     create_solution_file(args.year, args.day, args.part)
 
 
