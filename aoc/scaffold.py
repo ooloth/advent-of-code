@@ -99,14 +99,15 @@ def download_puzzle_input(year: int, day: int) -> None:
 @dataclass
 class Template:
     path: str
-    extension: str
+    lang: str
+    ext: str
 
 
 def create_solution_files(year: int, day: int, part: int) -> None:
     templates = [
-        Template(path="templates/python.txt", extension="py"),
-        Template(path="templates/rust.txt", extension="rs"),
-        Template(path="templates/typescript.txt", extension="ts"),
+        Template(path="templates/python.txt", lang="python", ext="py"),
+        Template(path="templates/rust.txt", lang="rust", ext="rs"),
+        Template(path="templates/typescript.txt", lang="typescript", ext="ts"),
     ]
 
     for template in templates:
@@ -119,13 +120,12 @@ def create_solution_files(year: int, day: int, part: int) -> None:
         with open(abs_path, "r") as file:
             content = file.read()
 
-        content = content.replace("{year}", str(year))
-        content = content.replace("{day}", str(day))
-        content = content.replace("{part}", str(part))
+        # Replace placeholders with their values
+        placeholders_and_replacements = {"{year}": year, "{day}": day, "{part}": part}
+        for placeholder, replacement in placeholders_and_replacements.items():
+            content = content.replace(placeholder, str(replacement))
 
-        rel_path_to_solution = (
-            f"solutions/{year}/{day}{'a' if part == 1 else 'b'}.{template.extension}"
-        )
+        rel_path_to_solution = f"solutions/{year}/{template.lang}/{day}{"a" if part == 1 else "b"}.{template.ext}"
         abs_path_to_solution = Path(rel_path_to_solution).resolve()
 
         if abs_path_to_solution.exists():
