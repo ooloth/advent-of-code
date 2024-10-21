@@ -9,49 +9,17 @@
 # TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
 
 
-import argparse
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
+from aoc.utils.parse_cli_args import parse_cli_args
+
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
 
-# def download_puzzle_data(
-#     year: int,
-#     day: int,
-#     data_type: str,
-#     session_file: Path = aoc_session_cookie_file,
-# ) -> None:
-#     if data_type not in ["puzzle", "input"]:
-#         raise ValueError("data_type must be either 'puzzle' or 'input'")
-
-#     file_extension = "md" if data_type == "puzzle" else "txt"
-#     rel_path = f"solutions/{year}/{data_type}s/{day}.{file_extension}"
-#     abs_path = Path(rel_path).resolve()
-
-#     if abs_path.exists():
-#         print(
-#             f"🎅 Puzzle{f" {data_type}" if data_type == "input" else ""} found at '{rel_path}'"
-#         )
-#         return
-
-#     # Ensure the file's parent directories exist
-#     abs_path.parent.mkdir(parents=True, exist_ok=True)
-
-#     # Construct the command based on the data type
-#     command = f"aoc download --year {year} --day {day} --{data_type}-only --{data_type}-file {rel_path} --session-file {session_file}"
-
-#     try:
-#         subprocess.run(command.split(" "), check=True)
-#         print(f"🎅 Saved {data_type} to '{rel_path}'")
-#     except subprocess.CalledProcessError as e:
-#         print(f"Error downloading {data_type}: {e}")
-#         exit(1)
-
-
 def download_puzzle_instructions(year: int, day: int) -> None:
-    rel_path = f"solutions/{year}/puzzles/{day}.md"
+    rel_path = f"aoc/{year}/puzzles/{day}.md"
     abs_path = Path(rel_path).resolve()
 
     if abs_path.exists():
@@ -74,7 +42,7 @@ def download_puzzle_instructions(year: int, day: int) -> None:
 
 
 def download_puzzle_input(year: int, day: int) -> None:
-    rel_path = f"solutions/{year}/inputs/{day}.txt"
+    rel_path = f"aoc/{year}/inputs/{day}.txt"
     abs_path = Path(rel_path).resolve()
 
     if abs_path.exists():
@@ -125,7 +93,7 @@ def create_solution_files(year: int, day: int, part: int) -> None:
         for placeholder, replacement in placeholders_and_replacements.items():
             content = content.replace(placeholder, str(replacement))
 
-        rel_path_to_solution = f"solutions/{year}/{template.lang}/{day}{"a" if part == 1 else "b"}.{template.ext}"
+        rel_path_to_solution = f"aoc/{year}/{template.lang}/{day}{"a" if part == 1 else "b"}.{template.ext}"
         abs_path_to_solution = Path(rel_path_to_solution).resolve()
 
         if abs_path_to_solution.exists():
@@ -142,27 +110,10 @@ def create_solution_files(year: int, day: int, part: int) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Generate Python file with placeholders replaced."
-    )
-    parser.add_argument("--year", type=int, required=True, help="Year (2015 or later)")
-    parser.add_argument("--day", type=int, required=True, help="Day (1-25)")
-    parser.add_argument("--part", type=int, required=True, help="Part (1 or 2)")
+    args = parse_cli_args()
 
-    args = parser.parse_args()
-
-    if args.year < 2015:
-        raise ValueError("Year must be 2015 or later.")
-    if args.day < 1 or args.day > 25:
-        raise ValueError("Day must be between 1 and 25.")
-    if args.part not in [1, 2]:
-        raise ValueError("Part must be 1 or 2.")
-
-    # download_puzzle_data(args.year, args.day, "puzzle")
-    # download_puzzle_data(args.year, args.day, "input")
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
-
     create_solution_files(args.year, args.day, args.part)
 
 
