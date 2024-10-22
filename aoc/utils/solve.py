@@ -4,29 +4,45 @@
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
 
 
+import argparse
 import importlib
 
-from aoc.utils.parse_cli_args import parse_cli_args
+from aoc.utils.py.template import get_puzzle_input
+
+
+def parse_solve_cli_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Download puzzle and create solution files from their templates."
+    )
+
+    parser.add_argument("--year", type=int, required=True, help="Year (2015 or later)")
+    parser.add_argument("--day", type=int, required=True, help="Day (1-25)")
+    parser.add_argument("--part", type=int, required=True, help="Part (1 or 2)")
+
+    args = parser.parse_args()
+
+    if args.year < 2015:
+        raise ValueError("Year must be 2015 or later.")
+    if args.day < 1 or args.day > 25:
+        raise ValueError("Day must be between 1 and 25.")
+    if args.part not in [1, 2]:
+        raise ValueError("Part must be 1 or 2.")
+
+    return args
 
 
 def run_solution(year: int, day: int, part: int, language: str) -> None:
-    # Import the solution module
-    # from solutions.{year}.{language}.{day}{"a" if part == 1 else "b"} import solution
-
-    module = importlib.import_module(
+    solution_module = importlib.import_module(
         f"aoc.{year}.{language}.{day}{"a" if part == 1 else "b"}"
     )
 
-    # Download the puzzle input
-    from aoc.utils.py.template import get_puzzle_input
-
     input = get_puzzle_input(year, day)
-    answer = module.solution(input)
+    answer = solution_module.solution(input)
     print(f"Answer: {answer}")
 
 
 def main() -> None:
-    args = parse_cli_args()
+    args = parse_solve_cli_args()
 
     run_solution(args.year, args.day, args.part, "python")
 
