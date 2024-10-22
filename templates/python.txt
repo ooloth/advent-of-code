@@ -20,6 +20,6 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    from utils.py.template import get_puzzle_input
+    from aoc.utils.py.template import get_puzzle_input
 
     print(solution(get_puzzle_input({year}, {day})))
