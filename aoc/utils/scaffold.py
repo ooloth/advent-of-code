@@ -1,4 +1,3 @@
-# TODO: https://github.com/wimglenn/advent-of-code-data
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/get_inputs.py
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
@@ -99,19 +98,19 @@ def create_solution_files(year: int, day: int, part: int) -> None:
     ]
 
     for template in templates:
-        abs_path = Path(template.path).resolve()
+        abs_path_to_template = Path(template.path).resolve()
 
-        if not abs_path.exists():
+        if not abs_path_to_template.exists():
             print(f"No template found at '{template.path}'")
             continue
 
-        with open(abs_path, "r") as file:
+        with open(abs_path_to_template, "r") as file:
             content = file.read()
 
         # Replace placeholders with their values
-        placeholders_and_replacements = {"{year}": year, "{day}": day, "{part}": part}
-        for placeholder, replacement in placeholders_and_replacements.items():
-            content = content.replace(placeholder, str(replacement))
+        placeholders_and_values = {"{year}": year, "{day}": day, "{part}": part}
+        for placeholder, value in placeholders_and_values.items():
+            content = content.replace(placeholder, str(value))
 
         rel_path_to_solution = f"aoc/{year}/{template.lang}/{day}{"a" if part == 1 else "b"}.{template.ext}"
         abs_path_to_solution = Path(rel_path_to_solution).resolve()
