@@ -8,7 +8,6 @@
 # TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
 
 
-import argparse
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -17,28 +16,11 @@ aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
 from rich import print
 
-def parse_scaffold_cli_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Download puzzle and create solution files from their templates."
-    )
-
-    parser.add_argument("--year", type=int, required=True, help="Year (2015 or later)")
-    parser.add_argument("--day", type=int, required=True, help="Day (1-25)")
-    parser.add_argument("--part", type=int, required=True, help="Part (1 or 2)")
-
-    args = parser.parse_args()
-
-    if args.year < 2015:
-        raise ValueError("Year must be 2015 or later.")
-    if args.day < 1 or args.day > 25:
-        raise ValueError("Day must be between 1 and 25.")
-    if args.part not in [1, 2]:
-        raise ValueError("Part must be 1 or 2.")
-
-    return args
+from aoc.utils.cli import Day, Part, Year, parse_scaffold_cli_args
 
 
-def download_puzzle_instructions(year: int, day: int) -> None:
+
+def download_puzzle_instructions(year: Year, day: Day) -> None:
     rel_path = f"aoc/{year}/puzzles/{day}.md"
     abs_path = Path(rel_path).resolve()
 
@@ -61,7 +43,7 @@ def download_puzzle_instructions(year: int, day: int) -> None:
         exit(1)
 
 
-def download_puzzle_input(year: int, day: int) -> None:
+def download_puzzle_input(year: Year, day: Day) -> None:
     rel_path = f"aoc/{year}/inputs/{day}.txt"
     abs_path = Path(rel_path).resolve()
 
@@ -91,7 +73,7 @@ class Template:
     ext: str
 
 
-def create_solution_files(year: int, day: int, part: int) -> None:
+def create_solution_files(year: Year, day: Day, part: Part) -> None:
     templates = [
         Template(path="templates/python.txt", lang="python", ext="py"),
         Template(path="templates/rust.txt", lang="rust", ext="rs"),
