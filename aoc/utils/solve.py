@@ -11,13 +11,12 @@ from aoc.utils.inputs import read_input_for_day
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/generate_readme.py
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
 
+Input = list[str]
+Answer = int | None
+Example = tuple[Input, int]
 
-def get_solution_function(
-    year: Year,
-    day: Day,
-    part: Part,
-    language: Language,
-) -> Callable:
+
+def get_solution_function(year: Year, day: Day, part: Part, language: Language) -> Callable:
     try:
         module_name = f"aoc.{year}.{language}.{day}{'a' if part == 1 else 'b'}"
         solution_module = importlib.import_module(module_name)
@@ -29,33 +28,33 @@ def get_solution_function(
         raise ImportError(f"Function 'solution' not found in module {module_name}.")
 
 
-def get_answer(year: Year, day: Day, part: Part, language: Language) -> int:
-    solution_function = get_solution_function(year, day, part, language)
+def calculate_answer(year: Year, day: Day, part: Part, language: Language) -> Answer:
+    solution = get_solution_function(year, day, part, language)
     input = read_input_for_day(year, day)
     # print(input)
-    answer = solution_function(input)
+    answer = solution(input)
     return answer
+
+
+def print_answer(answer: Answer) -> None:
+    if not isinstance(answer, int):
+        print("Solution not yet implemented.")
+
+    print(f"Answer: {answer}")
+
+
+def submit_answer(answer: Answer) -> None: ...
 
 
 def main() -> None:
     args = parse_solve_cli_args()
-    answer = get_answer(args.year, args.day, args.part, "python")
-    print(f"Answer: {answer}")
+    answer = calculate_answer(args.year, args.day, args.part, "python")
 
+    if args.submit:
+        submit_answer(answer)
+    else:
+        print_answer(answer)
 
-# def submit_solution(year: int, day: int) -> None:
-#     # Import the solution module
-#     module = importlib.import_module(f"aoc.solutions.y{year}.d{day:02}")
-#     solution = module.Solution()
-
-#     # Download the puzzle input
-#     solution.download_input()
-
-#     # Solve the puzzle
-#     solution.solve()
-
-#     # Submit the solution
-#     solution.submit()
 
 if __name__ == "__main__":
     main()

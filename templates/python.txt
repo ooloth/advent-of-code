@@ -1,18 +1,17 @@
-# Advent of Code {year}: Day {day}, Part {part}
-# https://adventofcode.com/{year}/day/{day}
+# Advent of Code {year}, Day {day}, Part {part}: https://adventofcode.com/{year}/day/{day}
 
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/templates/day_template.txt
-
-Input = list[str]
-Answer = int
+from aoc.utils.inputs import read_input_for_day
+from aoc.utils.solve import Answer, Example, Input, print_answer
 
 
 def solution(input: Input) -> Answer:
-    return len(input)
+    answer = None
+
+    return answer
 
 
 def test_solution() -> None:
-    examples: list[tuple[Input, Answer]] = [
+    examples: list[Example] = [
         (["a"], 1),
         (["a", "b"], 2),
         (["a", "b", "c"], 3),
@@ -23,10 +22,6 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    from rich import print
-
-    from aoc.utils.inputs import read_input_for_day
-
-    input = read_input_for_day({year}, {day})
+    input = read_input_for_day(2015, 5)
     answer = solution(input)
-    print(f"Answer: {answer}")
+    print_answer(answer)
