@@ -1,9 +1,3 @@
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/runner.py
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/benchmarks.py
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/generate_readme.py
-# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
-
-
 import importlib
 
 from rich import print
@@ -21,6 +15,12 @@ def run_solution(year: int, day: int, part: int, language: str) -> None:
     input = get_input_for_day(year, day)
     answer = solution_module.solution(input)
     print(f"Answer: {answer}")
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/runner.py
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/benchmarks.py
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/generate_readme.py
+# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
+
+
     input = read_input_for_day(year, day)
 
 

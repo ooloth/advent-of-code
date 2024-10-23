@@ -1,6 +1,13 @@
-# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/get_inputs.py
+import subprocess
+from dataclasses import dataclass
+from pathlib import Path
+
+from rich import print
+
+from aoc.utils.cli import Day, Part, Year, parse_scaffold_cli_args
+
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
+# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
 # TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
 # TODO: https://github.com/AlexeSimon/adventofcode/blob/master/init.py
 # TODO: https://github.com/Bogdanp/awesome-advent-of-code?tab=readme-ov-file#python
@@ -8,16 +15,7 @@
 # TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
 
 
-import subprocess
-from dataclasses import dataclass
-from pathlib import Path
-
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
-
-from rich import print
-
-from aoc.utils.cli import Day, Part, Year, parse_scaffold_cli_args
-
 
 
 def download_puzzle_instructions(year: Year, day: Day) -> None:
