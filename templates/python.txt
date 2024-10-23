@@ -12,19 +12,21 @@ def solution(input: Input) -> Answer:
 
 
 def test_solution() -> None:
-    test_cases: list[tuple[Input, Answer]] = [
+    examples: list[tuple[Input, Answer]] = [
         (["a"], 1),
         (["a", "b"], 2),
         (["a", "b", "c"], 3),
     ]
 
-    for input, expected in test_cases:
+    for input, expected in examples:
         assert solution(input) == expected
 
 
 if __name__ == "__main__":
-    from aoc.utils.inputs import get_input_for_day
+    from rich import print
 
-    input = get_input_for_day({year}, {day})
+    from aoc.utils.inputs import read_input_for_day
+
+    input = read_input_for_day({year}, {day})
     answer = solution(input)
     print(f"Answer: {answer}")

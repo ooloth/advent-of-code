@@ -7,7 +7,6 @@
 import argparse
 import importlib
 
-from aoc.utils.inputs import get_input_for_day
 
 
 def parse_solve_cli_args() -> argparse.Namespace:
@@ -19,6 +18,7 @@ from rich import print
     parser.add_argument("--year", type=int, required=True, help="Year (2015 or later)")
     parser.add_argument("--day", type=int, required=True, help="Day (1-25)")
     parser.add_argument("--part", type=int, required=True, help="Part (1 or 2)")
+from aoc.utils.inputs import read_input_for_day
 
     args = parser.parse_args()
 
@@ -40,6 +40,7 @@ def run_solution(year: int, day: int, part: int, language: str) -> None:
     input = get_input_for_day(year, day)
     answer = solution_module.solution(input)
     print(f"Answer: {answer}")
+    input = read_input_for_day(year, day)
 
 
 def main() -> None:
