@@ -41,6 +41,8 @@ def download_puzzle_instructions(year: Year, day: Day) -> None:
         exit(1)
 
 
+# TODO: make custom API request instead of using aoc-cli?
+# TODO: attach my email address to the User-Agent header?
 def download_puzzle_input(year: Year, day: Day) -> None:
     rel_path = f"aoc/{year}/inputs/{day}.txt"
     abs_path = Path(rel_path).resolve()
