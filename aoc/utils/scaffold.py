@@ -15,6 +15,7 @@ from pathlib import Path
 
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
+from rich import print
 
 def parse_scaffold_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(

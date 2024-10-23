@@ -14,6 +14,7 @@ def parse_solve_cli_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Download puzzle and create solution files from their templates."
     )
+from rich import print
 
     parser.add_argument("--year", type=int, required=True, help="Year (2015 or later)")
     parser.add_argument("--day", type=int, required=True, help="Day (1-25)")
