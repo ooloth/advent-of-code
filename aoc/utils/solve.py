@@ -43,7 +43,14 @@ def print_answer(answer: Answer) -> None:
     print(f"Answer: {answer}")
 
 
-def submit_answer(answer: Answer) -> None: ...
+def submit_answer(answer: Answer) -> None:
+    if not isinstance(answer, int):
+        print("Solution not yet implemented. Submission cancelled.")
+        print(f"Answer: {answer}")
+        return
+
+    print(f"Submitting answer: {answer}")
+    print("TODO: Implement submit_answer")
 
 
 def main() -> None:
