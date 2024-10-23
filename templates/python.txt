@@ -3,16 +3,19 @@
 
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/templates/day_template.txt
 
+Input = list[str]
+Answer = int
 
-def solution(input: str) -> int:
+
+def solution(input: Input) -> Answer:
     return len(input)
 
 
 def test_solution() -> None:
-    test_cases: list[tuple[str, int]] = [
-        ("a", 1),
-        ("ab", 2),
-        ("abc", 3),
+    test_cases: list[tuple[Input, Answer]] = [
+        (["a"], 1),
+        (["a", "b"], 2),
+        (["a", "b", "c"], 3),
     ]
 
     for input, expected in test_cases:
@@ -20,6 +23,8 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    from aoc.utils.py.template import get_puzzle_input
+    from aoc.utils.inputs import get_input_for_day
 
-    print(solution(get_puzzle_input({year}, {day})))
+    input = get_input_for_day({year}, {day})
+    answer = solution(input)
+    print(f"Answer: {answer}")

@@ -7,7 +7,7 @@
 import argparse
 import importlib
 
-from aoc.utils.py.template import get_puzzle_input
+from aoc.utils.inputs import get_input_for_day
 
 
 def parse_solve_cli_args() -> argparse.Namespace:
@@ -36,7 +36,7 @@ def run_solution(year: int, day: int, part: int, language: str) -> None:
         f"aoc.{year}.{language}.{day}{"a" if part == 1 else "b"}"
     )
 
-    input = get_puzzle_input(year, day)
+    input = get_input_for_day(year, day)
     answer = solution_module.solution(input)
     print(f"Answer: {answer}")
 
