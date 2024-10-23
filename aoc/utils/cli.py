@@ -28,7 +28,7 @@ def valid_part(value: str) -> Part:
     return cast(Part, part)
 
 
-def parse_scaffold_cli_args() -> Namespace:
+def parse_new_puzzle_cli_args() -> Namespace:
     parser = ArgumentParser(description="Download puzzle and generate solution files.")
 
     parser.add_argument("--year", "-y", type=valid_year, help="Year (2015 or later)", required=True)

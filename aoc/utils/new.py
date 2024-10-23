@@ -4,7 +4,7 @@ from pathlib import Path
 
 from rich import print
 
-from aoc.utils.cli import Day, Part, Year, parse_scaffold_cli_args
+from aoc.utils.cli import Day, Part, Year, parse_new_puzzle_cli_args
 
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
@@ -112,7 +112,7 @@ def create_solution_files(year: Year, day: Day, part: Part) -> None:
 
 
 def main() -> None:
-    args = parse_scaffold_cli_args()
+    args = parse_new_puzzle_cli_args()
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
     create_solution_files(args.year, args.day, args.part)
