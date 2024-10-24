@@ -1,1 +1,2 @@
-# TODO: put helpers for API requests here? or should that all live in new.py?
+# TODO: put helpers for adventofcode.com API requests here?
+# TODO: follow API usage guidelines

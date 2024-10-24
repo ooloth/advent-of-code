@@ -29,6 +29,7 @@ def get_solution_function(year: Year, day: Day, part: Part, language: Language) 
 
 
 def calculate_answer(year: Year, day: Day, part: Part, language: Language) -> Answer:
+    """TODO: handle solution module not found, function not found, etc."""
     solution = get_solution_function(year, day, part, language)
     input = read_input_for_day(year, day)
     # print(input)
