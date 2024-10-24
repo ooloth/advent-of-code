@@ -31,7 +31,7 @@ def download_puzzle_instructions(year: Year, day: Day) -> None:
 
     # Save the puzzle puzzle to the new file
     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
-    command = f"aoc download --year {year} --day {day} --puzzle-only --puzzle-file {rel_path} --session-file {aoc_session_cookie_file}"
+    command = f"aoc d -y {year} -d {day} -P -p {rel_path} -s {aoc_session_cookie_file}"
 
     try:
         subprocess.run(command.split(" "), check=True)
@@ -56,7 +56,7 @@ def download_puzzle_input(year: Year, day: Day) -> None:
 
     # Save the puzzle input to the new file
     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
-    command = f"aoc download --year {year} --day {day} --input-only --input-file {rel_path} --session-file {aoc_session_cookie_file}"
+    command = f"aoc d -y {year} -d {day} -I -i {rel_path} -s {aoc_session_cookie_file}"
 
     try:
         subprocess.run(command.split(" "), check=True)
