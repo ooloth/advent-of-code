@@ -37,7 +37,7 @@ def download_puzzle_instructions(year: Year, day: Day) -> None:
         subprocess.run(command.split(" "), check=True)
         print(f"🎅 Saved puzzle to '{rel_path}'")
     except subprocess.CalledProcessError as e:
-        print(f"Error downloading puzzle: {e}")
+        print(f"🚨 Error downloading puzzle: {e}")
         exit(1)
 
 
@@ -62,7 +62,7 @@ def download_puzzle_input(year: Year, day: Day) -> None:
         subprocess.run(command.split(" "), check=True)
         print(f"🎅 Saved input to '{rel_path}'")
     except subprocess.CalledProcessError as e:
-        print(f"Error downloading input: {e}")
+        print(f"🚨 Error downloading input: {e}")
         exit(1)
 
 
@@ -84,7 +84,7 @@ def create_solution_files(year: Year, day: Day, part: Part) -> None:
         abs_path_to_template = Path(template.path).resolve()
 
         if not abs_path_to_template.exists():
-            print(f"No template found at '{template.path}'")
+            print(f"🚨 No template found at '{template.path}'")
             continue
 
         with open(abs_path_to_template, "r") as file:

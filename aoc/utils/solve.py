@@ -43,18 +43,16 @@ def calculate_answer(year: Year, day: Day, part: Part, language: Language) -> An
 
 def print_answer(answer: Answer) -> None:
     if not isinstance(answer, int):
-        print("Solution not yet implemented.")
+        print("🤔 Solution is not an integer. Have you solved this puzzle?")
 
-    print(f"Answer: {answer}")
+    print(f"🔍 Answer: {answer}")
 
 
 def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
     if not isinstance(answer, int):
-        print("Solution not yet implemented. Submission cancelled.")
-        print(f"Answer: {answer}")
+        print("🤔 Solution is not an integer. Submission cancelled.")
+        print(f"🔍 Answer: {answer}")
         return
-
-    print(f"Submitting answer: {answer}")
 
     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
     command = f"aoc s -y {year} -d {day} -s {aoc_session_cookie_file} {part} {answer}"
@@ -62,7 +60,7 @@ def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
     try:
         subprocess.run(command.split(" "), check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Error submitting answer: {e}")
+        print(f"🛑 Error submitting answer: {e}")
         exit(1)
 
 
