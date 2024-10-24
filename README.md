@@ -1,6 +1,6 @@
 # 🎄 Advent of Code
 
-Solutions for [Advent of Code](https://adventofcode.com/) in languages I'm fiddling with.
+Solutions for [Advent of Code](https://adventofcode.com/) puzzles in languages I enjoy.
 
 ## Commands
 
@@ -13,7 +13,7 @@ $ bin/solve [YEAR]-[DAY]-[PART] --submit
 For example:
 
 ```bash
-$ bin/new 2015-1-1 # download the 2015, day 1, part 1 puzzle description and input, and generate solution files
+$ bin/new 2015-1-1 # download the 2015, day 1, part 1 puzzle and its input and generate solution files
 $ bin/solve 2023-25-2 # output my 2023, day 25, part 2 answer
 $ bin/solve 2023-25-2 --submit # submit my 2023, day 25, part 2 answer
 ```
@@ -24,4 +24,4 @@ To download your input, you need to include your AOC `session` cookie with each 
 
 Find the cookie named "session" and copy its value into a `.aoc-session-cookie` file at the root of this project (it won't be tracked).
 
-When it eventually expires, repeat these steps with the new cookie value.
+When the value eventually expires, repeat these steps.
