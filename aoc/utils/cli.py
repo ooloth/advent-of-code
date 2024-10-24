@@ -1,10 +1,18 @@
 from argparse import ArgumentParser, ArgumentTypeError, Namespace
+from dataclasses import dataclass
 from typing import Literal, cast
 
 Year = Literal[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
 Day = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 Part = Literal[1, 2]
 Language = Literal["python", "rust", "typescript"]
+
+
+@dataclass
+class PuzzleId:
+    year: Year
+    day: Day
+    part: Part
 
 
 def valid_year(value: str) -> Year:
@@ -28,22 +36,29 @@ def valid_part(value: str) -> Part:
     return cast(Part, part)
 
 
-def parse_new_puzzle_cli_args() -> Namespace:
-    parser = ArgumentParser(description="Download puzzle and generate solution files.")
+def valid_puzzle_id(value: str) -> PuzzleId:
+    """Validate a puzzle ID in the format 'year-day-part' (e.g. '2015-1-1')."""
+    year, day, part = value.split("-")
 
-    parser.add_argument("--year", "-y", type=valid_year, help="Year (2015 or later)", required=True)
-    parser.add_argument("--day", "-d", type=valid_day, help="Day (1-25)", required=True)
-    parser.add_argument("--part", "-p", type=valid_part, help="Part (1 or 2)", required=True)
+    return PuzzleId(year=valid_year(year), day=valid_day(day), part=valid_part(part))
 
-    return parser.parse_args()
+
+def parse_new_puzzle_cli_args() -> PuzzleId:
+    parser = ArgumentParser(description="Download a puzzle description and its input and generate solution files.")
+
+    parser.add_argument("puzzle_id", type=valid_puzzle_id, help='[YEAR]-[DAY]-[PART]: e.g. "2015-1-1", "2024-25-2"')
+
+    args = parser.parse_args()
+
+    return args.puzzle_id
 
 
 def parse_solve_cli_args() -> Namespace:
     parser = ArgumentParser(description="Run a solution and optionally submit it.")
 
-    parser.add_argument("--year", "-y", type=valid_year, help="Year (2015 or later)", required=True)
-    parser.add_argument("--day", "-d", type=valid_day, help="Day (1-25)", required=True)
-    parser.add_argument("--part", "-p", type=valid_part, help="Part (1 or 2)", required=True)
-    parser.add_argument("--submit", "-s", action="store_true", help="Submit the solution")
+    parser.add_argument("puzzle_id", type=valid_puzzle_id, help='[YEAR]-[DAY]-[PART]: e.g. "2015-1-1", "2024-25-2"')
+    parser.add_argument("-s", "--submit", action="store_true", help="Submit your answer to adventofcode.com")
 
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    return Namespace(year=args.puzzle_id.year, day=args.puzzle_id.day, part=args.puzzle_id.part, submit=args.submit)
