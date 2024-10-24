@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from aoc.utils.cli import Day, Year
+
 
 def _parse_input_file(path: Path) -> list[str]:
     """
@@ -10,7 +12,7 @@ def _parse_input_file(path: Path) -> list[str]:
         # TODO: what if the input file is missing?
 
 
-def read_input_for_day(year: int, day: int) -> list[str]:
+def read_input_for_day(year: Year, day: Day) -> list[str]:
     """
     Gets the input for the day from a local file and returns it as a list of strings.
     """
