@@ -12,7 +12,8 @@
   "deno.enable": true,
   "editor.formatOnSave": true,
   "files.associations": {
-    ".aoc-session-cookie": "plaintext"
+    ".aoc-session-cookie": "plaintext",
+    "**/bin/*": "shellscript",
   },
   "search.exclude": {
     "**/.mypy_cache": true,
