@@ -1,4 +1,6 @@
 import importlib
+import subprocess
+from pathlib import Path
 from typing import Callable
 
 from rich import print
@@ -14,6 +16,8 @@ from aoc.utils.inputs import read_input_for_day
 Input = list[str]
 Answer = int | None
 Example = tuple[Input, int]
+
+aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
 
 def get_solution_function(year: Year, day: Day, part: Part, language: Language) -> Callable:
@@ -44,14 +48,22 @@ def print_answer(answer: Answer) -> None:
     print(f"Answer: {answer}")
 
 
-def submit_answer(answer: Answer) -> None:
+def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
     if not isinstance(answer, int):
         print("Solution not yet implemented. Submission cancelled.")
         print(f"Answer: {answer}")
         return
 
     print(f"Submitting answer: {answer}")
-    print("TODO: Implement submit_answer")
+
+    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+    command = f"aoc s -y {year} -d {day} -s {aoc_session_cookie_file} {part} {answer}"
+
+    try:
+        subprocess.run(command.split(" "), check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error submitting answer: {e}")
+        exit(1)
 
 
 def main() -> None:
@@ -59,7 +71,7 @@ def main() -> None:
     answer = calculate_answer(args.year, args.day, args.part, "python")
 
     if args.submit:
-        submit_answer(answer)
+        submit_answer(args.year, args.day, args.part, answer)
     else:
         print_answer(answer)
 
