@@ -16,23 +16,32 @@ class PuzzleId:
 
 
 def valid_year(value: str) -> Year:
-    year = int(value)
+    try:
+        year = int(value)
+    except ValueError:
+        raise ArgumentTypeError(f'Year must be an integer (got "{value}")')
     if year not in range(2015, 2025):
-        raise ArgumentTypeError(f"Year must be between 2015 and 2024, got {year}")
+        raise ArgumentTypeError(f'Year must be between 2015 and 2024 (got "{year}")')
     return cast(Year, year)
 
 
 def valid_day(value: str) -> Day:
-    day = int(value)
+    try:
+        day = int(value)
+    except ValueError:
+        raise ArgumentTypeError(f'Day must be an integer (got "{value}")')
     if day not in range(1, 26):
-        raise ArgumentTypeError(f"Day must be between 1 and 25, got {day}")
+        raise ArgumentTypeError(f'Day must be between 1 and 25 (got "{day}")')
     return cast(Day, day)
 
 
 def valid_part(value: str) -> Part:
-    part = int(value)
+    try:
+        part = int(value)
+    except ValueError:
+        raise ArgumentTypeError(f'Part must be an integer (got "{value}")')
     if part not in [1, 2]:
-        raise ArgumentTypeError(f"Part must be 1 or 2, got {part}")
+        raise ArgumentTypeError(f"Part must be 1 or 2 (got {part})")
     return cast(Part, part)
 
 
