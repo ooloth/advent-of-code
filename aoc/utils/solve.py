@@ -6,7 +6,7 @@ from typing import Callable
 from rich import print
 
 from aoc.utils.cli import Day, Language, Part, Year, parse_solve_cli_args
-from aoc.utils.inputs import read_input_for_day
+from aoc.utils.python.inputs import read_input_for_day
 
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/runner.py
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/benchmarks.py
