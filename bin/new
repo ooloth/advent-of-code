@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-export PYTHONPATH="$PWD"
+source "bin/env"
 
-uv run "$PWD/aoc/utils/new.py" "$@"
+uv run "aoc/utils/new.py" "$@"

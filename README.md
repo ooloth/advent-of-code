@@ -2,12 +2,18 @@
 
 Solutions for [Advent of Code](https://adventofcode.com/) puzzles in languages I enjoy.
 
+## Environment variables
+
+Update the `AOC_LANGUAGE` and `AOC_YEAR` environment variables in `bin/env` to match your preferences.
+
+They are used to determine which puzzles to download and which solutions to run and submit.
+
 ## Commands
 
 ```bash
-$ bin/new [YEAR]-[DAY]-[PART]
-$ bin/solve [YEAR]-[DAY]-[PART]
-$ bin/solve [YEAR]-[DAY]-[PART] --submit
+$ bin/new <year>-<day>-<part> # start a new puzzle
+$ bin/solve <year>-<day>-<part> # run a puzzle solution
+$ bin/solve <year>-<day>-<part> --submit # submit a puzzle solution
 ```
 
 For example:

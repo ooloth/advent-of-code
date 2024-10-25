@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Environment
+export MYPYPATH="$PWD"
+export PYTHONPATH="$PWD"
+
+# Puzzle options
+export AOC_LANGUAGE=typescript # python, rust, typescript
+export AOC_YEAR=2015 # 2015-2023

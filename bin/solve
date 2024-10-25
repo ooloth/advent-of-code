@@ -1,9 +1,21 @@
 #!/usr/bin/env sh
 
-export PYTHONPATH="$PWD"
+# Usage:
+#
+# $ solve <year>-<day>-<part>
+# $ solve <year>-<day>-<part> -s
+# $ solve <year>-<day>-<part> --submit
+#
+# Examples:
+#
+# $ solve 2015-1-1
+# $ solve 2015-1-1 -s
+# $ solve 2023-25-2 --submit
 
-# Set the local language variable based on $AOC_LANGUAGE, overridable by the second argument
-language="${2:-$AOC_LANGUAGE}"
+# TODO: support this syntax?
+#
+# $ run 1a
+# $ submit 1a
 
 # if language is "python", call solve.py, but if it's "typescript", call solve.ts
 if [ "$language" = "python" ]; then
@@ -12,5 +24,9 @@ elif [ "$language" = "typescript" ]; then
     deno run "$PWD/aoc/utils/typescript/solve.ts" "$@"
 else
     echo "Unsupported language: $language"
+source "bin/env"
+
+echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
+echo "🎄 AOC_YEAR: $AOC_YEAR"
     exit 1
 fi
