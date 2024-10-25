@@ -2,4 +2,15 @@
 
 export PYTHONPATH="$PWD"
 
-uv run "$PWD/aoc/utils/solve.py" "$@"
+# Set the local language variable based on $AOC_LANGUAGE, overridable by the second argument
+language="${2:-$AOC_LANGUAGE}"
+
+# if language is "python", call solve.py, but if it's "typescript", call solve.ts
+if [ "$language" = "python" ]; then
+    uv run "$PWD/aoc/utils/python/solve.py" "$@"
+elif [ "$language" = "typescript" ]; then
+    deno run "$PWD/aoc/utils/typescript/solve.ts" "$@"
+else
+    echo "Unsupported language: $language"
+    exit 1
+fi

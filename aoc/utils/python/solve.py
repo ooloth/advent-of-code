@@ -20,9 +20,9 @@ Example = tuple[Input, int]
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
 
-def get_solution_function(year: Year, day: Day, part: Part, language: Language) -> Callable:
+def get_solution_function(year: Year, day: Day, part: Part) -> Callable:
     try:
-        module_name = f"aoc.{year}.{language}.{day}{'a' if part == 1 else 'b'}"
+        module_name = f"aoc.{year}.python.{day}{'a' if part == 1 else 'b'}"
         solution_module = importlib.import_module(module_name)
         solution_function = getattr(solution_module, "solution")
         return solution_function
@@ -32,9 +32,9 @@ def get_solution_function(year: Year, day: Day, part: Part, language: Language) 
         raise ImportError(f"Function 'solution' not found in module {module_name}.")
 
 
-def calculate_answer(year: Year, day: Day, part: Part, language: Language) -> Answer:
+def calculate_answer(year: Year, day: Day, part: Part) -> Answer:
     """TODO: handle solution module not found, function not found, etc."""
-    solution = get_solution_function(year, day, part, language)
+    solution = get_solution_function(year, day, part)
     input = read_input_for_day(year, day)
     # print(input)
     answer = solution(input)
@@ -66,7 +66,7 @@ def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
 
 def main() -> None:
     args = parse_solve_cli_args()
-    answer = calculate_answer(args.year, args.day, args.part, "python")
+    answer = calculate_answer(args.year, args.day, args.part)
 
     if args.submit:
         submit_answer(args.year, args.day, args.part, answer)
