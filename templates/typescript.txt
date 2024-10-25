@@ -1,12 +1,9 @@
 // Advent of Code {year}, Day {day}, Part {part}: https://adventofcode.com/{year}/day/{day}
 import { assertEquals } from 'jsr:@std/assert'
 import { readInputForDay } from '../../utils/typescript/inputs.ts'
+import { type Answer, type Example, type Input } from '../../utils/typescript/solve.ts'
 
-type Input = string[]
-type Answer = number | null
-type Example = [Input, number]
-
-function solution(input: Input): Answer {
+export function solution(input: Input): Answer {
   const answer = null
 
   return answer
