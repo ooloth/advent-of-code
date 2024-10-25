@@ -4,7 +4,7 @@ from pathlib import Path
 
 from rich import print
 
-from aoc.utils.cli import Day, Part, Year, parse_new_puzzle_cli_args
+from aoc.utils.python.cli import Day, Part, Year, parse_new_puzzle_cli_args
 
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start

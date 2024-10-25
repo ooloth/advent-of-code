@@ -5,7 +5,6 @@ from typing import Literal, cast
 Year = Literal[2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024]
 Day = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 Part = Literal[1, 2]
-Language = Literal["python", "rust", "typescript"]
 
 
 @dataclass
@@ -41,7 +40,7 @@ def valid_part(value: str) -> Part:
     except ValueError:
         raise ArgumentTypeError(f'Part must be an integer (got "{value}")')
     if part not in [1, 2]:
-        raise ArgumentTypeError(f"Part must be 1 or 2 (got {part})")
+        raise ArgumentTypeError(f'Part must be 1 or 2 (got "{part}")')
     return cast(Part, part)
 
 

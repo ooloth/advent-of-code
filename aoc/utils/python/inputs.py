@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from aoc.utils.cli import Day, Year
+from aoc.utils.python.cli import Day, Year
 
 
 def read_input_for_day(year: Year, day: Day) -> list[str]:
