@@ -6,6 +6,7 @@ from rich import print
 
 from aoc.utils.python.cli import Day, Part, Year, parse_new_puzzle_cli_args
 
+# TODO: only create solution file for active language?
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
 # TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
@@ -95,7 +96,7 @@ def create_solution_files(year: Year, day: Day, part: Part) -> None:
         for placeholder, value in placeholders_and_values.items():
             content = content.replace(placeholder, str(value))
 
-        rel_path_to_solution = f"aoc/{year}/{template.lang}/{day}{"a" if part == 1 else "b"}.{template.ext}"
+        rel_path_to_solution = f"aoc/{year}/{template.lang}/{day}{part}.{template.ext}"
         abs_path_to_solution = Path(rel_path_to_solution).resolve()
 
         if abs_path_to_solution.exists():

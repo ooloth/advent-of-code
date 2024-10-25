@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# Usage:
+#
+# $ submit <year>-<day>-<part>
+#
+# Examples:
+#
+# $ submit 2015-1-1
+# $ submit 2023-25-2
+
+# TODO: support this syntax?
+#
+# $ submit 1a
+# $ submit 25b
+
+source "bin/env"
+
+echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
+echo "🎄 AOC_YEAR: $AOC_YEAR"
+
+case "$AOC_LANGUAGE" in
+  python)
+    uv run "aoc/utils/python/submit.py" "$@" ;;
+  typescript)
+    deno run --allow-env --allow-read "aoc/utils/typescript/submit.ts" "$@" ;;
+  *)
+    echo "Unsupported language: $AOC_LANGUAGE"
+    exit 1 ;;
+esac

@@ -11,17 +11,17 @@ They are used to determine which puzzles to download and which solutions to run 
 ## Commands
 
 ```bash
-$ bin/new <year>-<day>-<part> # start a new puzzle
-$ bin/solve <year>-<day>-<part> # run a puzzle solution
-$ bin/solve <year>-<day>-<part> --submit # submit a puzzle solution
+$ bin/new <day><part> # start a new puzzle in the active year
+$ bin/run <day><part> # run a puzzle solution in the active year
+$ bin/submit <day><part> # submit a puzzle answer in the active year
 ```
 
 For example:
 
 ```bash
-$ bin/new 2015-1-1 # download the 2015, day 1, part 1 puzzle and its input and generate solution files
-$ bin/solve 2023-25-2 # output my 2023, day 25, part 2 answer
-$ bin/solve 2023-25-2 --submit # submit my 2023, day 25, part 2 answer
+$ bin/new 1a # download the 2015, day 1, part 1 puzzle and its input and generate solution files
+$ bin/run 25b # output my 2023, day 25, part 2 answer
+$ bin/submit 25b --submit # submit my 2023, day 25, part 2 answer
 ```
 
 ## Advent of Code session cookie

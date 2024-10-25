@@ -1,7 +1,7 @@
 # Advent of Code {year}, Day {day}, Part {part}: https://adventofcode.com/{year}/day/{day}
 
 from aoc.utils.python.inputs import read_input_for_day
-from aoc.utils.python.solve import Answer, Example, Input, print_answer
+from aoc.utils.python.run import Answer, Example, Input, print_answer
 
 
 def solution(input: Input) -> Answer:

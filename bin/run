@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+# Usage: run <day><part>
+#
+# Example: run 1a
+# Example: run 25b
+
+source "bin/env"
+
+echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
+echo "🎄 AOC_YEAR: $AOC_YEAR"
+
+case "$AOC_LANGUAGE" in
+  python)
+    uv run "aoc/utils/python/run.py" "$@" ;;
+  typescript)
+    deno run --allow-env --allow-read "aoc/utils/typescript/run.ts" "$@" ;;
+  *)
+    echo "Unsupported language: $AOC_LANGUAGE"
+    exit 1 ;;
+esac

@@ -37,7 +37,7 @@ export type Day =
   | 24
   | 25
 
-export type Part = 1 | 2
+export type Part = 'a' | 'b'
 
 // TODO: use zod for parsing instead?
 function parseYear(year: string): Year {
@@ -69,29 +69,42 @@ function parseDay(day: string): Day {
 }
 
 function parsePart(part: string): Part {
-  const partAsInteger = parseInt(part, 10)
-
-  if (isNaN(partAsInteger)) {
-    throw new Error(`Part must be an integer (got "${part}")`)
+  if (!['a', 'b'].includes(part)) {
+    throw new Error(`Part must be "a" or "b" (got "${part}")`)
   }
 
-  if (![1, 2].includes(partAsInteger)) {
-    throw new Error(`Part must be 1 or 2 (got "${partAsInteger}")`)
-  }
+  return part as Part
+}
 
-  return partAsInteger as Part
+function getDefaultYear(): Year {
+  const now = new Date()
+  const currentYear = now.getFullYear()
+  const currentMonth = now.getMonth()
+  const mostRecentAocYear = currentMonth === 12 ? currentYear : currentYear - 1
+
+  return mostRecentAocYear as Year
+}
+
+function getActiveYear(): Year {
+  const explicitYear = Deno.env.get('AOC_YEAR')
+  const defaultYear = getDefaultYear()
+  const activeYear = explicitYear ? parseYear(explicitYear) : defaultYear
+
+  return activeYear
 }
 
 /**
  * See: https://docs.deno.com/examples/command-line-arguments/
  */
 export function parseSolveCliArgs() {
-  const [year, day, part] = Deno.args[0].split('-')
+  // Assume the last character represents the part (a or b) and everything before it represents the day (1-25)
+  const arg = Deno.args[0]
+  const day = arg.slice(0, -1) // All characters before the last one
+  const part = arg.slice(-1) // The last character
 
   return {
-    year: parseYear(year),
+    year: getActiveYear(),
     day: parseDay(day),
     part: parsePart(part),
-    submit: ['-s', '--submit'].includes(Deno.args[1]),
   }
 }
