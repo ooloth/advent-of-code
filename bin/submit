@@ -1,18 +1,9 @@
 #!/usr/bin/env sh
 
-# Usage:
+# Usage: submit <day><part>
 #
-# $ submit <year>-<day>-<part>
-#
-# Examples:
-#
-# $ submit 2015-1-1
-# $ submit 2023-25-2
-
-# TODO: support this syntax?
-#
-# $ submit 1a
-# $ submit 25b
+# Example: submit 1a
+# Example: submit 25b
 
 source "bin/env"
 
