@@ -1,5 +1,4 @@
-// Advent of Code {year}: Day {day}, Part {part}
-// https://adventofcode.com/{year}/day/{day}
+// Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
 
 pub fn solution(input: &str) -> Option<u32> {
     input.len()
@@ -11,9 +10,9 @@ mod tests {
 
     #[test]
     fn test_solution() {
-        let test_cases = vec![("a", Some(1)), ("ab", Some(2)), ("abc", Some(3))];
+        let examples = vec![("a", Some(1)), ("ab", Some(2)), ("abc", Some(3))];
 
-        for (input, expected) in test_cases {
+        for (input, expected) in examples {
             let actual = solution(input);
             assert_eq!(actual, expected);
         }

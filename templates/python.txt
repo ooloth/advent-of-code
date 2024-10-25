@@ -1,4 +1,4 @@
-# Advent of Code {year}, Day {day}, Part {part}: https://adventofcode.com/{year}/day/{day}
+# Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
 
 from aoc.utils.python.inputs import read_input_for_day
 from aoc.utils.python.run import Answer, Example, Input, print_answer
