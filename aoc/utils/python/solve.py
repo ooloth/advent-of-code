@@ -32,13 +32,12 @@ def get_solution_function(year: Year, day: Day, part: Part) -> Callable:
         raise ImportError(f"Function 'solution' not found in module {module_name}.")
 
 
-def calculate_answer(year: Year, day: Day, part: Part) -> Answer:
+def get_answer(year: Year, day: Day, part: Part) -> Answer:
     """TODO: handle solution module not found, function not found, etc."""
+
     solution = get_solution_function(year, day, part)
     input = read_input_for_day(year, day)
-    # print(input)
-    answer = solution(input)
-    return answer
+    return solution(input)
 
 
 def print_answer(answer: Answer) -> None:
@@ -66,7 +65,7 @@ def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
 
 def main() -> None:
     args = parse_solve_cli_args()
-    answer = calculate_answer(args.year, args.day, args.part)
+    answer = get_answer(args.year, args.day, args.part)
 
     if args.submit:
         submit_answer(args.year, args.day, args.part, answer)
