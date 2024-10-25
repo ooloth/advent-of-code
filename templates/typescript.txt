@@ -1,0 +1,31 @@
+// Advent of Code {year}, Day {day}, Part {part}: https://adventofcode.com/{year}/day/{day}
+import { assertEquals } from 'jsr:@std/assert'
+import { readInputForDay } from '../../utils/typescript/inputs.ts'
+
+type Input = string[]
+type Answer = number | null
+type Example = [Input, number]
+
+function solution(input: Input): Answer {
+  const answer = null
+
+  return answer
+}
+
+Deno.test('solution', () => {
+  const examples: Example[] = [
+    [['a'], 1],
+    [['a', 'b'], 2],
+    [['a', 'b', 'c'], 3],
+  ]
+
+  for (const [input, expected] of examples) {
+    assertEquals(solution(input), expected)
+  }
+})
+
+if (import.meta.main) {
+  const input = readInputForDay({year}, {day})
+  const answer = solution(input)
+  console.log('Answer:', answer)
+}

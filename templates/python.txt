@@ -22,6 +22,6 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    input = read_input_for_day(2015, 5)
+    input = read_input_for_day({year}, {day})
     answer = solution(input)
     print_answer(answer)
