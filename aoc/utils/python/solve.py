@@ -64,6 +64,7 @@ def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
 
 
 def main() -> None:
+    print("Running Python solution")
     args = parse_solve_cli_args()
     answer = get_answer(args.year, args.day, args.part)
 
