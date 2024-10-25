@@ -3,18 +3,12 @@ from pathlib import Path
 from aoc.utils.cli import Day, Year
 
 
-def _parse_input_file(path: Path) -> list[str]:
-    """
-    Strips trailing characters (e.g. newlines) from input file and returns it as list of strings.
-    """
-    with path.open() as file:
-        return [line.rstrip() for line in file]
-        # TODO: what if the input file is missing?
-
-
 def read_input_for_day(year: Year, day: Day) -> list[str]:
     """
     Gets the input for the day from a local file and returns it as a list of strings.
+    Any trailing characters (e.g. newlines) are stripped from each line.
     """
     input_file = Path(f"aoc/{year}/inputs/{day}.txt").resolve()
-    return _parse_input_file(input_file)
+
+    with input_file.open() as file:
+        return [line.rstrip() for line in file]
