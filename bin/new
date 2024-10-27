@@ -13,3 +13,18 @@ set -e
 
 source "bin/validate_args"
 source "bin/env"
+
+day="${1%[ab]}" # strip the "a" or "b" from the end of $1
+part="${1#$day}" # strip the $day from the beginning of $1
+
+# function download_puzzle() {
+#   puzzle_destination="aoc/$AOC_YEAR/puzzles/$day.md"
+
+#   if [ -f "$puzzle_destination" ]; then
+#     echo "🎅 Found puzzle at '{rel_path}'"
+#     echo "Puzzle already exists: $puzzle_destination"
+#     return
+#   fi
+# }
+
+uv run "aoc/utils/new.py" "$AOC_YEAR" "$day" "$part"
