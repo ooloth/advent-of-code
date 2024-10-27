@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-# Usage: test <day><part>
-#
-# Example: test 1a
-# Example: test 25b
+# Usage:
+#   test <day><part>
+#   test 1a
+#   test 25b
 
 set -e
 

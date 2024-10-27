@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-# Usage: new <day><part>
-#
-# Example: new 1a
-# Example: new 25b
+# Usage:
+#   new <day><part>
+#   new 1a
+#   new 25b
 
 # TODO: support these args?
 # $ new (infer which puzzle to generate next; i.e. the next unsolved one in AOC_YEAR; need local json file with my AOC progress? or use aoc-cli?)

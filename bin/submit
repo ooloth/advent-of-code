@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
-# Usage: submit <day><part>
-#
-# Example: submit 1a
-# Example: submit 25b
+# Usage:
+#   submit <day><part>
+#   submit 1a
+#   submit 25b
 
 set -e
 
