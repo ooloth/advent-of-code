@@ -9,15 +9,61 @@ set -e
 source "bin/validate_args"
 source "bin/env"
 
-echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
-echo "🎄 AOC_YEAR: $AOC_YEAR"
+day="${1%[ab]}" # strip the "a" or "b" from the end of $1
+part="${1#$day}" # strip the $day from the beginning of $1
 
-case "$AOC_LANGUAGE" in
-  python)
-    uv run "aoc/utils/python/run.py" "$@" ;;
-  typescript)
-    deno run --allow-env --allow-read "aoc/utils/typescript/run.ts" "$@" ;;
-  *)
-    echo "Unsupported language: $AOC_LANGUAGE"
-    exit 1 ;;
-esac
+# Check if -s or --submit flag is passed
+if echo "$@" | grep -Eq -- '-s|--submit'; then
+  submit=true
+else
+  submit=false
+fi
+
+function get_answer() {
+  local day="$1"
+  local part="$2"
+
+  local solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
+  local input=$(cat "aoc/$AOC_YEAR/inputs/$day.txt")
+  local answer=""
+
+  # TODO: handle no input file
+  # TODO: handle empty input
+  # TODO: handle no solution file
+
+  case "$AOC_LANGUAGE" in
+    python)
+      answer=$(uv run "$solution" "$input") ;;
+    typescript)
+      answer=$(deno run --allow-env --allow-read "$solution" "$input") ;;
+    *)
+      echo "🚨 Unsupported language: $AOC_LANGUAGE"
+      exit 1 ;;
+  esac
+
+  echo "$answer"
+}
+
+function print_answer() {
+  local answer="$1"
+
+  if ! echo "$answer" | grep -Eq '^[0-9]+$'; then
+    echo "🤔 Solution is not an integer. Have you solved this puzzle?"
+  fi
+
+  echo "🔍 Answer: $answer"
+}
+
+function submit_answer() {
+  local answer="$1"
+  echo "🚀 Submitting answer: $answer"
+  echo "TODO"
+}
+
+answer=$(get_answer "$day" "$part")
+
+if [ "$submit" = true ]; then
+  submit_answer "$answer"
+else
+  print_answer "$answer"
+fi

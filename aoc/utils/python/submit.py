@@ -3,7 +3,7 @@ from pathlib import Path
 
 from rich import print
 
-from aoc.utils.python.cli import Day, Part, Year, parse_solve_cli_args
+from aoc.utils.python.cli import Day, Part, Year, parse_cli_args
 from aoc.utils.python.run import Answer, get_answer
 
 
@@ -26,7 +26,7 @@ def submit_answer(year: Year, day: Day, part: Part, answer: Answer) -> None:
 
 
 def main() -> None:
-    args = parse_solve_cli_args()
+    args = parse_cli_args()
     answer = get_answer(args.year, args.day, args.part)
     submit_answer(args.year, args.day, args.part, answer)
 
