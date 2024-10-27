@@ -1,20 +1,22 @@
 # Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
 
-from aoc.utils.python.inputs import read_input_for_day
-from aoc.utils.python.run import Answer, Example, Input, print_answer
+import sys
 
 
-def solution(input: Input) -> Answer:
+def solution(input: str) -> int | None:
     answer = None
+
+    for line in input.splitlines():
+        ...
 
     return answer
 
 
 def test_solution() -> None:
-    examples: list[Example] = [
-        (["a"], 1),
-        (["a", "b"], 2),
-        (["a", "b", "c"], 3),
+    examples: list[tuple[str, int]] = [
+        ("a", 1),
+        ("ab", 2),
+        ("abc", 3),
     ]
 
     for input, expected in examples:
@@ -22,6 +24,5 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    input = read_input_for_day({year}, {day})
-    answer = solution(input)
-    print_answer(answer)
+    # Call the solution with the CLI input and print the result for bin/run to capture
+    print(solution(sys.argv[1]))
