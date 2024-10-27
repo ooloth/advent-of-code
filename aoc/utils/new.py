@@ -121,7 +121,7 @@ def open_puzzle_and_solution_files_in_vscode_window(year: Year, day: Day, part: 
     editor_command = "code -r" if editor == "code" else "v -N"
 
     # see: https://code.visualstudio.com/docs/editor/command-line
-    command = f"{editor_command} aoc/{year}/puzzles/{day}.md aoc/{year}/inputs/{day}.txt aoc/{year}/{os.getenv('AOC_LANGUAGE')}/{day}{part}.py"
+    command = f"{editor_command} aoc/{year}/puzzles/{day}.md aoc/{year}/inputs/{day}.txt aoc/{year}/{os.getenv('AOC_LANGUAGE')}/{day}{part}.{os.getenv('AOC_LANGUAGE_EXTENSION')}"
 
     try:
         subprocess.run(command.split(" "), check=True)
