@@ -126,12 +126,27 @@ def display_puzzle_instructions(year: Year, day: Day) -> None:
     except subprocess.CalledProcessError as e:
         print(f"🚨 Error showing puzzle description: {e}")
         exit(1)
+
+
+def open_puzzle_and_solution_files_in_vscode_window(year: Year, day: Day, part: Part) -> None:
+    # TODO: do this from shell script instead?
+    # see: https://code.visualstudio.com/docs/editor/command-line
+    command = f"{os.getenv('EDITOR')} -r aoc/{year}/puzzles/{day}.md aoc/{year}/inputs/{day}.txt aoc/{year}/{os.getenv('AOC_LANGUAGE')}/{day}{part}.py"
+
+    try:
+        subprocess.run(command.split(" "), check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"🚨 Error opening files in VS Code: {e}")
+        exit(1)
+
+
 def main() -> None:
     args = parse_cli_args()
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
     create_solution_files(args.year, args.day, args.part)
     display_puzzle_instructions(args.year, args.day)
+    open_puzzle_and_solution_files_in_vscode_window(args.year, args.day, args.part)
 
 
 if __name__ == "__main__":
