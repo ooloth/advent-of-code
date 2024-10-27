@@ -1,14 +1,15 @@
 #!/usr/bin/env sh
 
-# Usage:
+# Usage (to run solution):
 #  run <day><part>
+#  run 1a
+#  run 25b
+#
+# Usage (to submit answer):
 #  run <day><part> -s
 #  run <day><part> --submit
-#
-# Examples:
-#   run 1a
-#   run 25b -s
-#   run 15a --submit
+#  run 25b -s
+#  run 15a --submit
 #
 # As an alternative to "run --submit", you can use the "submit" script.
 
