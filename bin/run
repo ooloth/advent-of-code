@@ -5,6 +5,8 @@
 # Example: run 1a
 # Example: run 25b
 
+set -e
+source "bin/validate_args"
 source "bin/env"
 
 echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"

@@ -1,15 +1,15 @@
 #!/usr/bin/env sh
 
-source "bin/env"
-
 # Usage: new <day><part>
 #
 # Example: new 1a
 # Example: new 25b
 
-# TODO: support this syntax?
-#
+# TODO: support these args?
 # $ new (infer which puzzle to generate next; i.e. the next unsolved one in AOC_YEAR; need local json file with my AOC progress? or use aoc-cli?)
 # $ new 1 (if no part specified, default to first unsolved part? or just generate both parts?)
 
-uv run "aoc/utils/new.py" "$@"
+set -e
+
+source "bin/validate_args"
+source "bin/env"
