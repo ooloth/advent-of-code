@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+# Usage: test <day><part>
+#
+# Example: test 1a
+# Example: test 25b
+
+set -e
+
+source "bin/validate_args"
+source "bin/env"
+
+solution_path_without_extension="aoc/$AOC_YEAR/$AOC_LANGUAGE/$1"
+
+case "$AOC_LANGUAGE" in
+  python)
+    pytest "$solution_path_without_extension.py" ;;
+    # pytest "aoc/$AOC_YEAR/python/$1.py" ;;
+  typescript)
+    # see: https://docs.deno.com/runtime/fundamentals/testing/
+    deno test "$solution_path_without_extension.ts" ;;
+    # deno run --allow-env --allow-read "aoc/utils/typescript/run.ts" "$@" ;;
+  *)
+    echo "Unsupported language: $AOC_LANGUAGE"
+    exit 1 ;;
+esac
