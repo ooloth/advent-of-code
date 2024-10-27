@@ -22,50 +22,50 @@ from aoc.utils.python.cli import Day, Part, Year, parse_cli_args
 aoc_session_cookie_file = Path(".aoc-session-cookie").resolve()
 
 
-def download_puzzle_instructions(year: Year, day: Day) -> None:
-    rel_path = f"aoc/{year}/puzzles/{day}.md"
-    abs_path = Path(rel_path).resolve()
+# def download_puzzle_instructions(year: Year, day: Day) -> None:
+#     rel_path = f"aoc/{year}/puzzles/{day}.md"
+#     abs_path = Path(rel_path).resolve()
 
-    if abs_path.exists():
-        print(f"🎅 Found puzzle at '{rel_path}'")
-        return
+#     if abs_path.exists():
+#         print(f"🎅 Found puzzle at '{rel_path}'")
+#         return
 
-    # Ensure the file's parent directories exist
-    abs_path.parent.mkdir(parents=True, exist_ok=True)
+#     # Ensure the file's parent directories exist
+#     abs_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Save the puzzle puzzle to the new file
-    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
-    command = f"aoc d -q -y {year} -d {day} -P -p {rel_path} -s {aoc_session_cookie_file}"
+#     # Save the puzzle puzzle to the new file
+#     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+#     command = f"aoc d -q -y {year} -d {day} -P -p {rel_path} -s {aoc_session_cookie_file}"
 
-    try:
-        subprocess.run(command.split(" "), check=True)
-        print(f"🎅 Saved instructions to '{rel_path}'")
-    except subprocess.CalledProcessError as e:
-        print(f"🚨 Error downloading instructions: {e}")
-        exit(1)
+#     try:
+#         subprocess.run(command.split(" "), check=True)
+#         print(f"🎅 Saved instructions to '{rel_path}'")
+#     except subprocess.CalledProcessError as e:
+#         print(f"🚨 Error downloading instructions: {e}")
+#         exit(1)
 
 
-def download_puzzle_input(year: Year, day: Day) -> None:
-    rel_path = f"aoc/{year}/inputs/{day}.txt"
-    abs_path = Path(rel_path).resolve()
+# def download_puzzle_input(year: Year, day: Day) -> None:
+#     rel_path = f"aoc/{year}/inputs/{day}.txt"
+#     abs_path = Path(rel_path).resolve()
 
-    if abs_path.exists():
-        print(f"🎅 Found input at '{rel_path}'")
-        return
+#     if abs_path.exists():
+#         print(f"🎅 Found input at '{rel_path}'")
+#         return
 
-    # Ensure the file's parent directories exist
-    abs_path.parent.mkdir(parents=True, exist_ok=True)
+#     # Ensure the file's parent directories exist
+#     abs_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Save the puzzle input to the new file
-    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
-    command = f"aoc d -q -y {year} -d {day} -I -i {rel_path} -s {aoc_session_cookie_file}"
+#     # Save the puzzle input to the new file
+#     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
+#     command = f"aoc d -q -y {year} -d {day} -I -i {rel_path} -s {aoc_session_cookie_file}"
 
-    try:
-        subprocess.run(command.split(" "), check=True)
-        print(f"🎅 Saved input to '{rel_path}'")
-    except subprocess.CalledProcessError as e:
-        print(f"🚨 Error downloading input: {e}")
-        exit(1)
+#     try:
+#         subprocess.run(command.split(" "), check=True)
+#         print(f"🎅 Saved input to '{rel_path}'")
+#     except subprocess.CalledProcessError as e:
+#         print(f"🚨 Error downloading input: {e}")
+#         exit(1)
 
 
 @dataclass
@@ -130,8 +130,8 @@ def open_puzzle_and_solution_files_in_vscode_window(year: Year, day: Day, part: 
 
 def main() -> None:
     args = parse_cli_args()
-    download_puzzle_instructions(args.year, args.day)
-    download_puzzle_input(args.year, args.day)
+    # download_puzzle_instructions(args.year, args.day)
+    # download_puzzle_input(args.year, args.day)
     create_solution_files(args.year, args.day, args.part)
     open_puzzle_and_solution_files_in_vscode_window(args.year, args.day, args.part)
 

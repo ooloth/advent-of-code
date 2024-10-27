@@ -31,13 +31,35 @@ function download_description() {
   # Ensure all parent directories exist
   mkdir -p "$(dirname "$abs_path")"
 
-  # Save the puzzle puzzle to the new file
+  # Download the puzzle description to $rel_path
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
   aoc d -q -y $AOC_YEAR -d $day -P -p $rel_path -s $AOC_SESSION_FILE
 
-  echo "🎅 Saved instructions to '$rel_path'"
-  # TODO: handle error
+  echo "🎅 Saved description to '$rel_path'"
+}
+
+function download_input() {
+  local day="$1"
+  local part="$2"
+  local rel_path="aoc/$AOC_YEAR/inputs/$day.txt"
+  local abs_path="$PWD/$rel_path"
+
+  if [ -f "$abs_path" ]; then
+    echo "🎅 Found input at '$rel_path'"
+    return 0
+  fi
+
+  # Ensure all parent directories exist
+  mkdir -p "$(dirname "$abs_path")"
+
+  # Download the puzzle input to $rel_path
+  # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+  aoc d -q -y $AOC_YEAR -d $day -I -i $rel_path -s $AOC_SESSION_FILE
+
+  echo "🎅 Saved input to '$rel_path'"
 }
 
 download_description "$day" "$part"
+download_input "$day" "$part"
+
 # uv run "aoc/utils/new.py" "$AOC_YEAR" "$day" "$part"
