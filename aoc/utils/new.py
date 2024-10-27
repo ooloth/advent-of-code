@@ -1,11 +1,14 @@
+import os
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
 from rich import print
 
-from aoc.utils.python.cli import Day, Part, Year, parse_new_puzzle_cli_args
+from aoc.utils.python.cli import Day, Part, Year, parse_cli_args
 
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/runner.py
+# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
 # TODO: only create solution file for active language?
 # TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
 # TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
@@ -32,13 +35,13 @@ def download_puzzle_instructions(year: Year, day: Day) -> None:
 
     # Save the puzzle puzzle to the new file
     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
-    command = f"aoc d -y {year} -d {day} -P -p {rel_path} -s {aoc_session_cookie_file}"
+    command = f"aoc d -q -y {year} -d {day} -P -p {rel_path} -s {aoc_session_cookie_file}"
 
     try:
         subprocess.run(command.split(" "), check=True)
-        print(f"🎅 Saved puzzle to '{rel_path}'")
+        print(f"🎅 Saved instructions to '{rel_path}'")
     except subprocess.CalledProcessError as e:
-        print(f"🚨 Error downloading puzzle: {e}")
+        print(f"🚨 Error downloading instructions: {e}")
         exit(1)
 
 
@@ -57,7 +60,7 @@ def download_puzzle_input(year: Year, day: Day) -> None:
 
     # Save the puzzle input to the new file
     # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#more-examples
-    command = f"aoc d -y {year} -d {day} -I -i {rel_path} -s {aoc_session_cookie_file}"
+    command = f"aoc d -q -y {year} -d {day} -I -i {rel_path} -s {aoc_session_cookie_file}"
 
     try:
         subprocess.run(command.split(" "), check=True)
