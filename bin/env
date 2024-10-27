@@ -7,6 +7,7 @@ export PYTHONPATH="$PWD"
 # Advent of Code options
 export AOC_YEAR=2015
 export AOC_LANGUAGE=typescript
+export AOC_SESSION_FILE="$PWD/.aoc-session-cookie"
 
 # Derived values
 case "$AOC_LANGUAGE" in
@@ -18,6 +19,7 @@ esac
 # echo "🎄 AOC_YEAR: $AOC_YEAR"
 # echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
 # echo "🎄 AOC_LANGUAGE_EXTENSION: $AOC_LANGUAGE_EXTENSION"
+# echo "🎄 AOC_SESSION_FILE: $AOC_SESSION_FILE"
 
 ##############
 # VALIDATION #
@@ -44,5 +46,11 @@ fi
 # AOC_LANGUAGE must be a supported language
 if [ "$AOC_LANGUAGE" != "python" ] && [ "$AOC_LANGUAGE" != "typescript" ]; then
   echo '🚨 AOC_LANGUAGE must be "python" or "typescript"'
+  exit 1
+fi
+
+# AOC_SESSION_FILE must not be empty
+if [ -z "$AOC_SESSION_FILE" ]; then
+  echo "🚨 AOC_SESSION_FILE is not set"
   exit 1
 fi

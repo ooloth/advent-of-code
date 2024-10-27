@@ -10,12 +10,4 @@ set -e
 source "bin/validate_args"
 source "bin/env"
 
-case "$AOC_LANGUAGE" in
-  python)
-    uv run "aoc/utils/python/submit.py" "$@" ;;
-  typescript)
-    deno run --allow-env --allow-read "aoc/utils/typescript/submit.ts" "$@" ;;
-  *)
-    echo "Unsupported language: $AOC_LANGUAGE"
-    exit 1 ;;
-esac
+bin/run "$@" --submit

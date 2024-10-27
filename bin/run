@@ -1,23 +1,20 @@
 #!/usr/bin/env sh
 
-# Usage: run <day><part>
+# Usage:
+#  run <day><part>
+#  run <day><part> -s
+#  run <day><part> --submit
 #
-# Example: run 1a
-# Example: run 25b
+# Examples:
+#   run 1a
+#   run 25b -s
+#   run 15a --submit
+#
+# As an alternative to "run --submit", you can use the "submit" script.
 
 set -e
 source "bin/validate_args"
 source "bin/env"
-
-day="${1%[ab]}" # strip the "a" or "b" from the end of $1
-part="${1#$day}" # strip the $day from the beginning of $1
-
-# Check if -s or --submit flag is passed
-if echo "$@" | grep -Eq -- '-s|--submit'; then
-  submit=true
-else
-  submit=false
-fi
 
 function get_answer() {
   local day="$1"
@@ -44,26 +41,48 @@ function get_answer() {
   echo "$answer"
 }
 
-function print_answer() {
+function confirm_answer_is_an_integer() {
   local answer="$1"
+  local consequence="$2"
 
   if ! echo "$answer" | grep -Eq '^[0-9]+$'; then
-    echo "🤔 Solution is not an integer. Have you solved this puzzle?"
+    echo "🤔 Solution is not an integer. $consequence"
+    echo "🔍 Answer: $answer"
+    exit 1
   fi
+}
 
+function print_answer() {
+  local answer="$1"
+  confirm_answer_is_an_integer "$answer" "Have you solved this puzzle?"
   echo "🔍 Answer: $answer"
 }
 
 function submit_answer() {
-  local answer="$1"
-  echo "🚀 Submitting answer: $answer"
-  echo "TODO"
+  local day="$1"
+  local part="$2"
+  local answer="$3"
+
+  # TODO: validate args
+
+  confirm_answer_is_an_integer "$answer" "Aborting submission."
+
+  # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+  aoc s -q -y "$AOC_YEAR" -d "$day" -s "$AOC_SESSION_FILE" "$part" "$answer"
+
+  # TODO: handle error
 }
 
+day="${1%[ab]}" # strip the "a" or "b" from the end of $1
+part="${1#$day}" # strip the $day from the beginning of $1
 answer=$(get_answer "$day" "$part")
+submit=false
+
+# Set submit=true if -s or --submit flag is passed
+if echo "$@" | grep -Eq -- '-s|--submit'; then submit=true; fi
 
 if [ "$submit" = true ]; then
-  submit_answer "$answer"
+  submit_answer "$day" "$part" "$answer"
 else
   print_answer "$answer"
 fi
