@@ -63,13 +63,14 @@ function submit_answer() {
   local day="$1"
   local part="$2"
   local answer="$3"
+  local part_as_number=$(echo "$part" | tr 'ab' '12')
 
   # TODO: validate args
 
   confirm_answer_is_an_integer "$answer" "Aborting submission."
 
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
-  aoc s -q -y "$AOC_YEAR" -d "$day" -s "$AOC_SESSION_FILE" "$part" "$answer"
+  aoc s -q -y "$AOC_YEAR" -d "$day" -s "$AOC_SESSION_FILE" "$part_as_number" "$answer"
 
   # TODO: handle error
 }
