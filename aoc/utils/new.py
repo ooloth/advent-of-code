@@ -115,11 +115,23 @@ def create_solution_files(year: Year, day: Day, part: Part) -> None:
         print(f"🎅 Created solution file at '{rel_path_to_solution}'")
 
 
+def display_puzzle_instructions(year: Year, day: Day) -> None:
+    """Show the puzzle instructions inline in the terminal."""
+
+    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#read-puzzle-description
+    command = f"aoc r -q -y {year} -d {day} -s {aoc_session_cookie_file}"
+
+    try:
+        subprocess.run(command.split(" "), check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"🚨 Error showing puzzle description: {e}")
+        exit(1)
 def main() -> None:
-    args = parse_new_puzzle_cli_args()
+    args = parse_cli_args()
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
     create_solution_files(args.year, args.day, args.part)
+    display_puzzle_instructions(args.year, args.day)
 
 
 if __name__ == "__main__":
