@@ -115,23 +115,13 @@ def create_solution_files(year: Year, day: Day, part: Part) -> None:
         print(f"🎅 Created solution file at '{rel_path_to_solution}'")
 
 
-def display_puzzle_instructions(year: Year, day: Day) -> None:
-    """Show the puzzle instructions inline in the terminal."""
-
-    # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#read-puzzle-description
-    command = f"aoc r -q -y {year} -d {day} -s {aoc_session_cookie_file}"
-
-    try:
-        subprocess.run(command.split(" "), check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"🚨 Error showing puzzle description: {e}")
-        exit(1)
-
-
 def open_puzzle_and_solution_files_in_vscode_window(year: Year, day: Day, part: Part) -> None:
     # TODO: do this from shell script instead?
+    editor = os.getenv("EDITOR")
+    editor_command = "code -r" if editor == "code" else "v -N"
+
     # see: https://code.visualstudio.com/docs/editor/command-line
-    command = f"{os.getenv('EDITOR')} -r aoc/{year}/puzzles/{day}.md aoc/{year}/inputs/{day}.txt aoc/{year}/{os.getenv('AOC_LANGUAGE')}/{day}{part}.py"
+    command = f"{editor_command} aoc/{year}/puzzles/{day}.md aoc/{year}/inputs/{day}.txt aoc/{year}/{os.getenv('AOC_LANGUAGE')}/{day}{part}.py"
 
     try:
         subprocess.run(command.split(" "), check=True)
@@ -145,7 +135,6 @@ def main() -> None:
     download_puzzle_instructions(args.year, args.day)
     download_puzzle_input(args.year, args.day)
     create_solution_files(args.year, args.day, args.part)
-    display_puzzle_instructions(args.year, args.day)
     open_puzzle_and_solution_files_in_vscode_window(args.year, args.day, args.part)
 
 

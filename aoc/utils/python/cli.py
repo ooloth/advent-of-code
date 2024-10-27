@@ -21,14 +21,3 @@ def parse_cli_args() -> Namespace:
         day=cast(Day, args.day),
         part=cast(Part, args.part),
     )
-
-
-# def parse_puzzle_input_from_cli_arg() -> str:
-#     parser = ArgumentParser(description="Pass puzzle input to a solution file as a string.")
-
-#     # NOTE: validation of each arg is done at the shell script level (so it applies to all languages)
-#     parser.add_argument("input", type=str)
-
-#     args = parser.parse_args()
-
-#     return args.input
