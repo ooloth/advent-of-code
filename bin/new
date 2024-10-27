@@ -17,14 +17,27 @@ source "bin/env"
 day="${1%[ab]}" # strip the "a" or "b" from the end of $1
 part="${1#$day}" # strip the $day from the beginning of $1
 
-# function download_puzzle() {
-#   puzzle_destination="aoc/$AOC_YEAR/puzzles/$day.md"
+function download_description() {
+  local day="$1"
+  local part="$2"
+  local rel_path="aoc/$AOC_YEAR/puzzles/$day.md"
+  local abs_path="$PWD/$rel_path"
 
-#   if [ -f "$puzzle_destination" ]; then
-#     echo "🎅 Found puzzle at '{rel_path}'"
-#     echo "Puzzle already exists: $puzzle_destination"
-#     return
-#   fi
-# }
+  if [ -f "$abs_path" ]; then
+    echo "🎅 Found puzzle at '$rel_path'"
+    return 0
+  fi
 
-uv run "aoc/utils/new.py" "$AOC_YEAR" "$day" "$part"
+  # Ensure all parent directories exist
+  mkdir -p "$(dirname "$abs_path")"
+
+  # Save the puzzle puzzle to the new file
+  # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+  aoc d -q -y $AOC_YEAR -d $day -P -p $rel_path -s $AOC_SESSION_FILE
+
+  echo "🎅 Saved instructions to '$rel_path'"
+  # TODO: handle error
+}
+
+download_description "$day" "$part"
+# uv run "aoc/utils/new.py" "$AOC_YEAR" "$day" "$part"

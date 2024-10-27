@@ -11,3 +11,5 @@ source "bin/validate_args"
 source "bin/env"
 
 bin/run "$@" --submit
+
+# TODO: download updated puzzle description if submission was successful?
