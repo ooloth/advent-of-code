@@ -1,9 +1,48 @@
 #!/usr/bin/env sh
 
-# Environment
+# Python environment
 export MYPYPATH="$PWD"
 export PYTHONPATH="$PWD"
 
-# Puzzle options
-export AOC_LANGUAGE=python # python, rust, typescript
-export AOC_YEAR=2015 # 2015-2023
+# Advent of Code options
+export AOC_YEAR=2015
+export AOC_LANGUAGE=typescript
+
+# Derived values
+case "$AOC_LANGUAGE" in
+  python) export AOC_LANGUAGE_EXTENSION=py ;;
+  typescript) export AOC_LANGUAGE_EXTENSION=ts ;;
+esac
+
+# Debug info
+# echo "🎄 AOC_YEAR: $AOC_YEAR"
+# echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
+# echo "🎄 AOC_LANGUAGE_EXTENSION: $AOC_LANGUAGE_EXTENSION"
+
+##############
+# VALIDATION #
+##############
+
+# AOC_YEAR must be set
+if [ -z "$AOC_YEAR" ]; then
+  echo "🚨 AOC_YEAR is not set"
+  exit 1
+fi
+
+# AOC_YEAR must be 2015-2024
+if ! [[ "$AOC_YEAR" =~ ^[0-9]{4}$ ]] || [ "$AOC_YEAR" -lt 2015 ] || [ "$AOC_YEAR" -gt 2024 ]; then
+  echo "🚨 AOC_YEAR must be a year between 2015-2024"
+  exit 1
+fi
+
+# AOC_LANGUAGE must be set
+if [ -z "$AOC_LANGUAGE" ]; then
+  echo "🚨 AOC_LANGUAGE is not set"
+  exit 1
+fi
+
+# AOC_LANGUAGE must be a supported language
+if [ "$AOC_LANGUAGE" != "python" ] && [ "$AOC_LANGUAGE" != "typescript" ]; then
+  echo '🚨 AOC_LANGUAGE must be "python" or "typescript"'
+  exit 1
+fi
