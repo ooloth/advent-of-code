@@ -23,5 +23,6 @@ Deno.test('solution', () => {
 })
 
 if (import.meta.main) {
+  // Pass the CLI input to the solution and print the result for bin/run to capture
   console.log(solution(Deno.args[0]))
 }

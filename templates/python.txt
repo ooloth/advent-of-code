@@ -25,5 +25,5 @@ def test_solution() -> None:
 
 
 if __name__ == "__main__":
-    # Call the solution with the CLI input and print the result for bin/run to capture
+    # Pass the CLI input to the solution and print the result for bin/run to capture
     print(solution(sys.argv[1]))
