@@ -120,12 +120,17 @@ function open_files_in_editor() {
   local input_path="aoc/$AOC_YEAR/inputs/$day.txt"
   local description_path="aoc/$AOC_YEAR/puzzles/$day.md"
 
-  if [[ "$EDITOR" == "code" ]]; then editor_args="-r"; else editor_args="-N"; fi
+  local vscode_options="-r"
+  local vim_options="-O"
+  local cmd_options=""
+
+  # See: https://code.visualstudio.com/docs/editor/command-line
+  # See: https://superuser.com/questions/486532/how-to-open-files-in-vertically-horizontal-split-windows-in-vim-from-the-command
+  cmd_options=$([[ "$EDITOR" == "code" ]] && echo "$vscode_options" || echo "$vim_options")
 
   # Open the description, input and solution file in $EDITOR
   # TODO: open with nvim using a specific tmux window layout and tests running in watch mode?
-  # see: https://code.visualstudio.com/docs/editor/command-line
-  "$EDITOR" "$editor_args" "$solution_path" "$input_path" "$description_path"
+  "$EDITOR" "$cmd_options" "$solution_path" "$input_path" "$description_path"
 }
 
 download_description "$day" "$part"
