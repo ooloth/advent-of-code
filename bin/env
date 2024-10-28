@@ -8,7 +8,7 @@ export PYTHONPATH="$PWD"
 
 # Advent of Code options
 export AOC_YEAR=2015
-export AOC_LANGUAGE=typescript
+export AOC_LANGUAGE=python
 export AOC_SESSION_FILE="$PWD/.aoc-session-cookie"
 
 # Derived values
