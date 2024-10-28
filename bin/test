@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Usage:
 #   test <day><part>
@@ -7,8 +7,11 @@
 
 set -e
 
-source "bin/validate_args"
-source "bin/env"
+# See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
+current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+source "$current_dir/validate_args"
+source "$current_dir/env"
 
 solution_path_without_extension="aoc/$AOC_YEAR/$AOC_LANGUAGE/$1"
 

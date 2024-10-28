@@ -1,6 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Validate the <day><part> argument most scripts expect
+
+set -e
 
 # Error if $1 is not set
 if [ -z "$1" ]; then

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Usage (to run solution):
 #  run <day><part>
@@ -14,20 +14,22 @@
 # As an alternative to "run --submit", you can use the "submit" script.
 
 set -e
-source "bin/validate_args"
-source "bin/env"
+
+# See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
+current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+source "$current_dir/validate_args"
+source "$current_dir/env"
 
 function get_answer() {
   local day="$1"
   local part="$2"
 
-  local solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
-  local input=$(cat "aoc/$AOC_YEAR/inputs/$day.txt")
-  local answer=""
+  local input=""
+  input=$(cat "aoc/$AOC_YEAR/inputs/$day.txt")
 
-  # TODO: handle no input file
-  # TODO: handle empty input
-  # TODO: handle no solution file
+  local solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
+  local answer=""
 
   case "$AOC_LANGUAGE" in
     python)
@@ -63,27 +65,25 @@ function submit_answer() {
   local day="$1"
   local part="$2"
   local answer="$3"
-  local part_as_number=$(echo "$part" | tr 'ab' '12')
 
-  # TODO: validate args
+  local part_as_number=""
+  part_as_number=$(echo "$part" | tr 'ab' '12')
 
   confirm_answer_is_an_integer "$answer" "Aborting submission."
 
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
   aoc s -q -y "$AOC_YEAR" -d "$day" -s "$AOC_SESSION_FILE" "$part_as_number" "$answer"
-
-  # TODO: handle error
 }
 
 day="${1%[ab]}" # strip the "a" or "b" from the end of $1
-part="${1#$day}" # strip the $day from the beginning of $1
+part="${1#"$day"}" # strip the $day from the beginning of $1
 answer=$(get_answer "$day" "$part")
 submit=false
 
 # Set submit=true if -s or --submit flag is passed
 if echo "$@" | grep -Eq -- '-s|--submit'; then submit=true; fi
 
-if [ "$submit" = true ]; then
+if [[ "$submit" = true ]]; then
   submit_answer "$day" "$part" "$answer"
 else
   print_answer "$answer"
