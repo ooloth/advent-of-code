@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Usage:
 #   new <day><part>
@@ -9,13 +9,26 @@
 # $ new (infer which puzzle to generate next; i.e. the next unsolved one in AOC_YEAR; need local json file with my AOC progress? or use aoc-cli?)
 # $ new 1 (if no part specified, default to first unsolved part? or just generate both parts?)
 
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/runner.py
+# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
+# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
+# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
+# TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
+# TODO: https://github.com/AlexeSimon/adventofcode/blob/master/init.py
+# TODO: https://github.com/Bogdanp/awesome-advent-of-code?tab=readme-ov-file#python
+# TODO: https://chatgpt.com/c/670df45e-5354-800a-a1f9-d2be7d49f4ca
+# TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
+
 set -e
 
-source "bin/validate_args"
-source "bin/env"
+# See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
+current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+
+source "$current_dir/validate_args"
+source "$current_dir/env"
 
 day="${1%[ab]}" # strip the "a" or "b" from the end of $1
-part="${1#$day}" # strip the $day from the beginning of $1
+part="${1#"$day"}" # strip the $day from the beginning of $1
 
 function download_description() {
   local day="$1"
@@ -33,7 +46,7 @@ function download_description() {
 
   # Download the puzzle description to $rel_path
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
-  aoc d -q -y $AOC_YEAR -d $day -P -p $rel_path -s $AOC_SESSION_FILE
+  aoc d -q -y "$AOC_YEAR" -d "$day" -P -p "$rel_path" -s "$AOC_SESSION_FILE"
 
   echo "🎅 Saved description to '$rel_path'"
 }
@@ -54,12 +67,67 @@ function download_input() {
 
   # Download the puzzle input to $rel_path
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
-  aoc d -q -y $AOC_YEAR -d $day -I -i $rel_path -s $AOC_SESSION_FILE
+  aoc d -q -y "$AOC_YEAR" -d "$day" -I -i "$rel_path" -s "$AOC_SESSION_FILE"
 
   echo "🎅 Saved input to '$rel_path'"
 }
 
+function create_solution_file() {
+  local day="$1"
+  local part="$2"
+  local rel_path_to_template="templates/$AOC_LANGUAGE.txt"
+  local abs_path_to_template="$PWD/$rel_path_to_template"
+
+  if [[ ! -f "$abs_path_to_template" ]]; then
+    echo "🚨 No template found at '$rel_path_to_template'"
+    return 1
+  fi
+
+  local content=""
+  content=$(cat "$abs_path_to_template")
+  # echo "initial content:"
+  # echo "$content"
+
+  # Replace placeholders in the template (using bash parameter expansion)
+  content="${content//\{year\}/$AOC_YEAR}"
+  content="${content//\{day\}/$day}"
+  content="${content//\{part\}/$part}"
+  # echo "updated content:"
+  # echo "$content"
+
+  local rel_path_to_solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
+  local abs_path_to_solution="$PWD/$rel_path_to_solution"
+
+  if [ -f "$abs_path_to_solution" ]; then
+    echo "🎅 Found solution at '$rel_path_to_solution'"
+    return 0
+  fi
+
+  # Ensure all parent directories exist
+  mkdir -p "$(dirname "$abs_path_to_solution")"
+
+  # Create a new solution file at $rel_path
+  echo "$content" > "$abs_path_to_solution"
+
+  echo "🎅 Created solution file at '$rel_path_to_solution'"
+}
+
+function open_files_in_editor() {
+  local day="$1"
+  local part="$2"
+  local description_path="aoc/$AOC_YEAR/puzzles/$day.md"
+  local input_path="aoc/$AOC_YEAR/inputs/$day.txt"
+  local solution_path="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
+
+  if [[ "$EDITOR" == "code" ]]; then editor_command="code -r"; else editor_command="v -N"; fi
+
+  # Open the description, input and solution file in $EDITOR
+  # TODO: open with nvim using a specific tmux window layout and tests running in watch mode?
+  # see: https://code.visualstudio.com/docs/editor/command-line
+  "$editor_command" "$description_path" "$input_path" "$solution_path"
+}
+
 download_description "$day" "$part"
 download_input "$day" "$part"
-
-# uv run "aoc/utils/new.py" "$AOC_YEAR" "$day" "$part"
+create_solution_file "$day" "$part"
+open_files_in_editor "$day" "$part"
