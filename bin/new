@@ -117,15 +117,15 @@ function open_files_in_editor() {
   local part="$2"
 
   local solution_path="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
-  local description_path="aoc/$AOC_YEAR/puzzles/$day.md"
   local input_path="aoc/$AOC_YEAR/inputs/$day.txt"
+  local description_path="aoc/$AOC_YEAR/puzzles/$day.md"
 
   if [[ "$EDITOR" == "code" ]]; then editor_args="-r"; else editor_args="-N"; fi
 
   # Open the description, input and solution file in $EDITOR
   # TODO: open with nvim using a specific tmux window layout and tests running in watch mode?
   # see: https://code.visualstudio.com/docs/editor/command-line
-  "$EDITOR" "$editor_args" "$solution_path" "$description_path" "$input_path"
+  "$EDITOR" "$editor_args" "$solution_path" "$input_path" "$description_path"
 }
 
 download_description "$day" "$part"
