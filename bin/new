@@ -19,7 +19,7 @@
 # TODO: https://chatgpt.com/c/670df45e-5354-800a-a1f9-d2be7d49f4ca
 # TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
 
-set -e
+set -eu
 
 # See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
 current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
@@ -85,15 +85,11 @@ function create_solution_file() {
 
   local content=""
   content=$(cat "$abs_path_to_template")
-  # echo "initial content:"
-  # echo "$content"
 
   # Replace placeholders in the template (using bash parameter expansion)
   content="${content//\{year\}/$AOC_YEAR}"
   content="${content//\{day\}/$day}"
   content="${content//\{part\}/$part}"
-  # echo "updated content:"
-  # echo "$content"
 
   local rel_path_to_solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
   local abs_path_to_solution="$PWD/$rel_path_to_solution"

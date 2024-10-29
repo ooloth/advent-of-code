@@ -2,7 +2,7 @@
 
 # Validate the <day><part> argument most scripts expect
 
-set -e
+set -eu
 
 # Error if $1 is not set
 if [ -z "$1" ]; then

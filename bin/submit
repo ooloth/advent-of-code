@@ -5,7 +5,7 @@
 #   submit 1a
 #   submit 25b
 
-set -e
+set -eu
 
 # See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
 current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")

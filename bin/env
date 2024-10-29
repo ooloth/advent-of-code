@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eu
 
 # Python environment
 export MYPYPATH="$PWD"
