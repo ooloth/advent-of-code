@@ -4,7 +4,6 @@
 def solution(input: str) -> int | None:
     answer = None
 
-    # TODO: investigate if for loops are slow in Python and there's a better default...
     for line in input.splitlines():
         ...
 
