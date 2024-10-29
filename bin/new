@@ -32,7 +32,6 @@ part="${1#"$day"}" # strip the $day from the beginning of $1
 
 function download_description() {
   local day="$1"
-  local part="$2"
   local rel_path="aoc/$AOC_YEAR/puzzles/$day.md"
   local abs_path="$PWD/$rel_path"
 
@@ -53,7 +52,6 @@ function download_description() {
 
 function download_input() {
   local day="$1"
-  local part="$2"
   local rel_path="aoc/$AOC_YEAR/inputs/$day.txt"
   local abs_path="$PWD/$rel_path"
 
@@ -75,6 +73,7 @@ function download_input() {
 function create_solution_file() {
   local day="$1"
   local part="$2"
+
   local rel_path_to_template="templates/$AOC_LANGUAGE.txt"
   local abs_path_to_template="$PWD/$rel_path_to_template"
 
@@ -129,7 +128,7 @@ function open_files_in_editor() {
   "$EDITOR" "$cmd_options" "$solution_path" "$input_path" "$description_path"
 }
 
-download_description "$day" "$part"
-download_input "$day" "$part"
+download_description "$day"
+download_input "$day"
 create_solution_file "$day" "$part"
 open_files_in_editor "$day" "$part"
