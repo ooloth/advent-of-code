@@ -13,6 +13,22 @@ current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 source "$current_dir/validate_args"
 source "$current_dir/env"
 
-bin/run "$@" --submit
+day="${1%[ab]}" # strip the "a" or "b" from the end of $1
+part="${1#"$day"}" # strip the $day from the beginning of $1
 
-# TODO: download updated puzzle description if submission was successful?
+download_updated_puzzle_description() {
+  local day="$1"
+  local rel_path="aoc/$AOC_YEAR/puzzles/$day.md"
+
+  # Update the existing puzzle description at $rel_path with the new version
+  # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
+  aoc d -oq -y "$AOC_YEAR" -d "$day" -P -p "$rel_path" -s "$AOC_SESSION_FILE"
+
+  echo "🎅 Saved updated description to '$rel_path'"
+}
+
+# Run the submit command and check its exit status
+if bin/run "$day$part" --submit; then
+  echo "🚀 Submission successful."
+  download_updated_puzzle_description "$day"
+fi
