@@ -31,27 +31,20 @@ esac
 # VALIDATION #
 ##############
 
-# AOC_YEAR must be set
-if [ -z "$AOC_YEAR" ]; then
-  echo "🚨 AOC_YEAR is not set"; exit 1
-fi
+# Check if required variables are set
+required_vars=("AOC_YEAR" "AOC_DAY" "AOC_PART")
+for var in "${required_vars[@]}"; do
+  if [ -z "${!var}" ]; then
+    echo "🚨 $var is not set"; exit 1
+  fi
+done
 
 # AOC_YEAR must be 2015-2024
 if ! [[ "$AOC_YEAR" =~ ^[0-9]{4}$ ]] || [[ "$AOC_YEAR" -lt 2015 ]] || [[ "$AOC_YEAR" -gt 2024 ]]; then
   echo "🚨 AOC_YEAR must be a year between 2015-2024"; exit 1
 fi
 
-# AOC_LANGUAGE must be set
-if [[ -z "$AOC_LANGUAGE" ]]; then
-  echo "🚨 AOC_LANGUAGE is not set"; exit 1
-fi
-
 # AOC_LANGUAGE must be a supported language
 if [[ "$AOC_LANGUAGE" != "python" ]] && [[ "$AOC_LANGUAGE" != "typescript" ]]; then
   echo '🚨 AOC_LANGUAGE must be "python" or "typescript"'; exit 1
-fi
-
-# AOC_SESSION_FILE must not be empty
-if [[ -z "$AOC_SESSION_FILE" ]]; then
-  echo "🚨 AOC_SESSION_FILE is not set"; exit 1
 fi
