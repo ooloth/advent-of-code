@@ -52,5 +52,10 @@ fi
 
 # AOC_LANGUAGE must be a supported language
 if [[ "$AOC_LANGUAGE" != "python" ]] && [[ "$AOC_LANGUAGE" != "typescript" ]]; then
-  echo '🚨 AOC_LANGUAGE must be "python" or "typescript"'; exit 1
+  echo "🚨 AOC_LANGUAGE must be 'python' or 'typescript'; got '$AOC_LANGUAGE'"; exit 1
+fi
+
+# AOC_LANGUAGE_EXTENSION must be a supported language extension
+if [[ "$AOC_LANGUAGE_EXTENSION" != "py" ]] && [[ "$AOC_LANGUAGE_EXTENSION" != "ts" ]]; then
+  echo "🚨 AOC_LANGUAGE_EXTENSION must be 'py' or 'ts'; got '$AOC_LANGUAGE_EXTENSION'"; exit 1
 fi
