@@ -57,7 +57,7 @@ function confirm_answer_is_an_integer() {
 
 function print_answer() {
   local answer="$1"
-  confirm_answer_is_an_integer "$answer" "Have you solved this puzzle?"
+  confirm_answer_is_an_integer "$answer" "Have you solved this puzzle yet?"
   echo "🔍 Answer: $answer"
 }
 

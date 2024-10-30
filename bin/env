@@ -21,12 +21,6 @@ case "$AOC_LANGUAGE" in
   typescript) export AOC_LANGUAGE_EXTENSION=ts ;;
 esac
 
-# Debug info
-# echo "🎄 AOC_YEAR: $AOC_YEAR"
-# echo "🎄 AOC_LANGUAGE: $AOC_LANGUAGE"
-# echo "🎄 AOC_LANGUAGE_EXTENSION: $AOC_LANGUAGE_EXTENSION"
-# echo "🎄 AOC_SESSION_FILE: $AOC_SESSION_FILE"
-
 ##############
 # VALIDATION #
 ##############
@@ -59,3 +53,11 @@ fi
 if [[ "$AOC_LANGUAGE_EXTENSION" != "py" ]] && [[ "$AOC_LANGUAGE_EXTENSION" != "ts" ]]; then
   echo "🚨 AOC_LANGUAGE_EXTENSION must be 'py' or 'ts'; got '$AOC_LANGUAGE_EXTENSION'"; exit 1
 fi
+
+inspect_vars() {
+  for var in "${vars[@]}"; do
+    echo "🎄 $var: ${!var}"
+  done
+}
+
+# inspect_vars
