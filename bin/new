@@ -9,16 +9,6 @@
 # $ new (infer which puzzle to generate next; i.e. the next unsolved one in AOC_YEAR; need local json file with my AOC progress? or use aoc-cli?)
 # $ new 1 (if no part specified, default to first unsolved part? or just generate both parts?)
 
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/runner.py
-# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/advent
-# TODO: https://github.com/marcelblijleven/adventofcode/blob/master/src/adventofcode/scripts/add_day.py
-# TODO: https://github.com/xavdid/advent-of-code-python-template/blob/main/start
-# TODO: https://github.com/alvesvaren/AoC-template/blob/main/aoc/_api.py
-# TODO: https://github.com/AlexeSimon/adventofcode/blob/master/init.py
-# TODO: https://github.com/Bogdanp/awesome-advent-of-code?tab=readme-ov-file#python
-# TODO: https://chatgpt.com/c/670df45e-5354-800a-a1f9-d2be7d49f4ca
-# TODO: https://github.com/caderek/aocrunner/blob/main/src/io/api.ts
-
 set -eu
 
 # See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
