@@ -1,7 +1,15 @@
 // Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
 
 pub fn solution(input: &str) -> Option<u32> {
-    input.len()
+    eprintln!("input={:?}", input);",
+
+    let mut answer = None
+
+    input.lines()
+    // input.chars()
+
+    return answer
+    // return Some(answer)
 }
 
 #[cfg(test)]
