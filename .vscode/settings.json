@@ -16,6 +16,7 @@
     "**/bin/*": "shellscript",
   },
   "print-it.python.template": "log({{raw}})",
+  "print-it.typescript.template": "console.warn('{{escaped}} =', {{raw}})",
   "search.exclude": {
     "**/.mypy_cache": true,
     "**/.pytest_cache": true,
