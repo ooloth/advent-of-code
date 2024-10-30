@@ -29,5 +29,5 @@ def test_solution() -> None:
 if __name__ == "__main__":
     import sys
 
-    # Pass the CLI input string to solution and print the result to stdout for bin/run to capture
+    # Pass the CLI input string to the solution and print the result to stdout for bin/run to capture
     print(solution(sys.argv[1]))

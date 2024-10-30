@@ -2,8 +2,9 @@
 
 import { assertEquals } from 'jsr:@std/assert'
 
-// TODO: how to send debug logs to stderr so they don't mix with the answer?
 export function solution(input: string): number | null {
+  console.warn('input:', input)
+
   const answer = null
 
   const lines = input.trim().split('\n')
@@ -24,6 +25,6 @@ Deno.test('solution', () => {
 })
 
 if (import.meta.main) {
-  // Pass the CLI input to the solution and print the result for bin/run to capture
+  // Pass the CLI input string to the solution and print the result to stdout for bin/run to capture
   console.log(solution(Deno.args[0]))
 }
