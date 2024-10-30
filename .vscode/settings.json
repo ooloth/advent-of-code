@@ -19,8 +19,9 @@
   "search.exclude": {
     "**/.mypy_cache": true,
     "**/.pytest_cache": true,
+    "**/.ruff_cache": true,
+    "**/.venv": true,
     "**/*.pyc": true,
-    "**/.venv": true
   },
   "search.useIgnoreFiles": false, // support searching for input and puzzle files (which aren't tracked)
 }
