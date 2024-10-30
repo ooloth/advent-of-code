@@ -31,13 +31,19 @@ esac
 # VALIDATION #
 ##############
 
-# Check if required variables are set
-required_vars=("AOC_YEAR" "AOC_DAY" "AOC_PART")
-for var in "${required_vars[@]}"; do
-  if [ -z "${!var}" ]; then
-    echo "🚨 $var is not set"; exit 1
-  fi
-done
+vars=("AOC_YEAR" "AOC_LANGUAGE" "AOC_LANGUAGE_EXTENSION" "AOC_INPUTS" "AOC_PUZZLES" "AOC_SOLUTIONS" "AOC_SESSION_FILE" "MYPYPATH" "PYTHONPATH")
+
+# Confirm all variables are set
+validate_required_vars() {
+  local required_vars=("$@")
+  for required_var in "${required_vars[@]}"; do
+    if [ -z "${!required_var}" ]; then
+      echo "🚨 $required_var is not set"; exit 1
+    fi
+  done
+}
+
+validate_required_vars "${vars[@]}"
 
 # AOC_YEAR must be 2015-2024
 if ! [[ "$AOC_YEAR" =~ ^[0-9]{4}$ ]] || [[ "$AOC_YEAR" -lt 2015 ]] || [[ "$AOC_YEAR" -gt 2024 ]]; then
