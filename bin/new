@@ -32,7 +32,7 @@ part="${1#"$day"}" # strip the $day from the beginning of $1
 
 function download_description() {
   local day="$1"
-  local rel_path="aoc/$AOC_YEAR/puzzles/$day.md"
+  local rel_path="$AOC_PUZZLES/$day.md"
   local abs_path="$PWD/$rel_path"
 
   if [ -f "$abs_path" ]; then
@@ -52,7 +52,7 @@ function download_description() {
 
 function download_input() {
   local day="$1"
-  local rel_path="aoc/$AOC_YEAR/inputs/$day.txt"
+  local rel_path="$AOC_INPUTS/$day.txt"
   local abs_path="$PWD/$rel_path"
 
   if [ -f "$abs_path" ]; then
@@ -90,7 +90,7 @@ function create_solution_file() {
   content="${content//\{day\}/$day}"
   content="${content//\{part\}/$part}"
 
-  local rel_path_to_solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
+  local rel_path_to_solution="$AOC_SOLUTIONS/$day$part.$AOC_LANGUAGE_EXTENSION"
   local abs_path_to_solution="$PWD/$rel_path_to_solution"
 
   if [ -f "$abs_path_to_solution" ]; then
@@ -111,9 +111,9 @@ function open_files_in_editor() {
   local day="$1"
   local part="$2"
 
-  local solution_path="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
-  local input_path="aoc/$AOC_YEAR/inputs/$day.txt"
-  local description_path="aoc/$AOC_YEAR/puzzles/$day.md"
+  local solution_path="$AOC_SOLUTIONS/$day$part.$AOC_LANGUAGE_EXTENSION"
+  local input_path="$AOC_INPUTS/$day.txt"
+  local description_path="$AOC_PUZZLES/$day.md"
 
   local vscode_options="-r"
   local vim_options="-O"

@@ -12,6 +12,10 @@ export AOC_LANGUAGE=python
 export AOC_SESSION_FILE="$PWD/.aoc-session-cookie"
 
 # Derived values
+export AOC_INPUTS="aoc/$AOC_YEAR/inputs"
+export AOC_PUZZLES="aoc/$AOC_YEAR/puzzles"
+export AOC_SOLUTIONS="aoc/$AOC_YEAR"
+
 case "$AOC_LANGUAGE" in
   python) export AOC_LANGUAGE_EXTENSION=py ;;
   typescript) export AOC_LANGUAGE_EXTENSION=ts ;;

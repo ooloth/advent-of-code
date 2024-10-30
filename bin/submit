@@ -18,7 +18,7 @@ part="${1#"$day"}" # strip the $day from the beginning of $1
 
 download_updated_puzzle_description() {
   local day="$1"
-  local rel_path="aoc/$AOC_YEAR/puzzles/$day.md"
+  local rel_path="$AOC_PUZZLES/$day.md"
 
   # Update the existing puzzle description at $rel_path with the new version
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F

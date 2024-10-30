@@ -26,9 +26,9 @@ function get_answer() {
   local part="$2"
 
   local input=""
-  input=$(cat "aoc/$AOC_YEAR/inputs/$day.txt")
+  input=$(cat "$AOC_INPUTS/$day.txt")
 
-  local solution="aoc/$AOC_YEAR/$AOC_LANGUAGE/$day$part.$AOC_LANGUAGE_EXTENSION"
+  local solution="$AOC_SOLUTIONS/$day$part.$AOC_LANGUAGE_EXTENSION"
   local answer=""
 
   case "$AOC_LANGUAGE" in

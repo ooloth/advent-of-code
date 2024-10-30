@@ -13,7 +13,7 @@ current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 source "$current_dir/validate_args"
 source "$current_dir/env"
 
-solution_path_without_extension="aoc/$AOC_YEAR/$AOC_LANGUAGE/$1"
+solution_path_without_extension="$AOC_SOLUTIONS/$1"
 
 case "$AOC_LANGUAGE" in
   python)
