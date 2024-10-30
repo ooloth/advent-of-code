@@ -15,6 +15,7 @@
     ".aoc-session-cookie": "plaintext",
     "**/bin/*": "shellscript",
   },
+  "print-it.python.template": "log({{raw}})",
   "search.exclude": {
     "**/.mypy_cache": true,
     "**/.pytest_cache": true,
