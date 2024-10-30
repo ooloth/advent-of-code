@@ -85,6 +85,7 @@ function submit_answer() {
   aoc s -q -y "$AOC_YEAR" -d "$day" -s "$AOC_SESSION_FILE" "$part_as_number" "$answer"
 
   # TODO: cache attempted submissions and whether they were correct, too high, or too low
+  # see: https://gist.github.com/MathisHammel/43aa722469a626504de40744dfe0a3da
 }
 
 day="${1%[ab]}" # strip the "a" or "b" from the end of $1
