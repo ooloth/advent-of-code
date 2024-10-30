@@ -8,6 +8,7 @@ def solution(input: str) -> int | None:
 
     answer = None
 
+    # df = pd.read_csv(io.StringIO(input), header=None)
     for line in input.splitlines():
         ...
 
