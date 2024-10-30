@@ -2,7 +2,7 @@
 
 # Validate the <day><part> argument most scripts expect
 
-set -eu
+set -euo pipefail
 
 # Error if $1 is not set
 if [ -z "$1" ]; then

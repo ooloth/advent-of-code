@@ -9,7 +9,7 @@
 # $ new (infer which puzzle to generate next; i.e. the next unsolved one in AOC_YEAR; need local json file with my AOC progress? or use aoc-cli?)
 # $ new 1 (if no part specified, default to first unsolved part? or just generate both parts?)
 
-set -eu
+set -euo pipefail
 
 # See: https://stackoverflow.com/questions/59895/how-do-i-get-the-directory-where-a-bash-script-is-located-from-within-the-script/246128#comment127065688_246128
 current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
