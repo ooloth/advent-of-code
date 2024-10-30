@@ -1,7 +1,11 @@
 # Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
 
+from aoc.utils.logs import log
+
 
 def solution(input: str) -> int | None:
+    log(input)
+
     answer = None
 
     for line in input.splitlines():
@@ -24,5 +28,5 @@ def test_solution() -> None:
 if __name__ == "__main__":
     import sys
 
-    # Pass the CLI input to the solution and print the result for bin/run to capture
+    # Pass the CLI input string to solution and print the result to stdout for bin/run to capture
     print(solution(sys.argv[1]))

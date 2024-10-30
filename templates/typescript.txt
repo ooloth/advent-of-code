@@ -2,6 +2,7 @@
 
 import { assertEquals } from 'jsr:@std/assert'
 
+// TODO: how to send debug logs to stderr so they don't mix with the answer?
 export function solution(input: string): number | null {
   const answer = null
 
