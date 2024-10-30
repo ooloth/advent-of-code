@@ -71,8 +71,20 @@ function submit_answer() {
 
   confirm_answer_is_an_integer "$answer" "Aborting submission."
 
+  # Get consent before submitting
+  echo "You are about to submit the following answer:"
+  echo ">>>>>>>>>>>>>>>>> $answer"
+  read -p "🤔 [y/N] " -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "🚫 Submission aborted."
+    exit 1
+  fi
+
   # see: https://github.com/scarvalhojr/aoc-cli?tab=readme-ov-file#usage-%EF%B8%8F
   aoc s -q -y "$AOC_YEAR" -d "$day" -s "$AOC_SESSION_FILE" "$part_as_number" "$answer"
+
+  # TODO: cache attempted submissions and whether they were correct, too high, or too low
 }
 
 day="${1%[ab]}" # strip the "a" or "b" from the end of $1
