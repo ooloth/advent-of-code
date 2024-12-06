@@ -2,9 +2,21 @@
 Advent of Code 2024, Puzzle 2b: https://adventofcode.com/2024/day/2
 """
 
+from expression import pipe
 
-def is_safe_report(report: list[int]) -> bool:
-    """Same as 2a, but now we'll also pass it all report variants with one level removed."""
+EngineerReports = str
+Level = int
+Report = list[Level]
+SafeReportCount = int
+
+
+def parse_engineer_reports(engineer_reports: EngineerReports) -> list[Report]:
+    """Same as 2a"""
+    return [[Level(level) for level in report.split()] for report in engineer_reports.splitlines()]
+
+
+def is_safe(report: Report) -> bool:
+    """Same as 2a"""
     if report != sorted(report) and report != sorted(report, reverse=True):
         return False
 
@@ -19,25 +31,28 @@ def is_safe_report(report: list[int]) -> bool:
 def is_safe_report_with_one_level_removed(report: list[int]) -> bool:
     for index, _ in enumerate(report):
         report_with_level_removed = report[:index] + report[index + 1 :]
-        if is_safe_report(report_with_level_removed):
+        if is_safe(report_with_level_removed):
             return True
 
     return False
 
 
-def solution(input: str) -> int:
-    safe_report_count = 0
+def keep_safe_reports(reports: list[Report]) -> list[Report]:
+    """Keep reports that are safe or can be made safe by removing one level."""
+    return [report for report in reports if is_safe(report) or is_safe_report_with_one_level_removed(report)]
 
-    for line in input.splitlines():
-        report = [int(x) for x in line.split()]
-        if is_safe_report(report) or is_safe_report_with_one_level_removed(report):
-            safe_report_count += 1
 
-    return safe_report_count
+def solution(input: EngineerReports) -> int:
+    return pipe(
+        input,
+        parse_engineer_reports,
+        keep_safe_reports,
+        len,
+    )
 
 
 def test_solution() -> None:
-    example_reports = """7 6 4 2 1
+    example_reports: EngineerReports = """7 6 4 2 1
 1 2 7 8 9
 9 7 6 2 1
 1 3 2 4 5
