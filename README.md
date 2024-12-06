@@ -4,9 +4,7 @@ Solutions for [Advent of Code](https://adventofcode.com/) puzzles in languages I
 
 ## Environment variables
 
-Update the `AOC_LANGUAGE` and `AOC_YEAR` environment variables in `bin/env` to match your preferences.
-
-They are used to determine which puzzles to download and which solutions to run and submit.
+Update the `AOC_LANGUAGE` and `AOC_YEAR` environment variables in `bin/env` to match your preferences. They determine which puzzles to download and which solution files to run and submit.
 
 ## Commands
 
