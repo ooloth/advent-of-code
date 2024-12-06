@@ -12,13 +12,10 @@ def solution(input: str) -> int:
         left_list.append(location_ids[0])
         right_list.append(location_ids[1])
 
-    # pair smallest in each list, then second smallest, etc.
-    pairs = zip(sorted(left_list), sorted(right_list))
+    sorted_pairs = zip(sorted(left_list), sorted(right_list))
+    distances_between_sorted_pairs = [abs(x - y) for x, y in sorted_pairs]
 
-    # compute distance between each pair (always positive)
-    distances = [abs(x - y) for x, y in pairs]
-
-    return sum(distances)
+    return sum(distances_between_sorted_pairs)
 
 
 def test_solution() -> None:
