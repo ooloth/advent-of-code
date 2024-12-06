@@ -8,13 +8,11 @@ from aoc.utils.logs import log
 def solution(input: str) -> int | None:
     log(input)
 
-    answer = None
-
     # df = pd.read_csv(io.StringIO(input), header=None)
     for line in input.splitlines():
         ...
 
-    return answer
+    return None
 
 
 def test_solution() -> None:
