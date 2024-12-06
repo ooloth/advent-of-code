@@ -16,18 +16,19 @@ class Instruction:
     right: int
 
 
+CorruptedMemory = str
 Product = int
 Answer = int
 
 
-def find_uncorrupted_mul_instructions(corrupted_memory: str) -> Iterator[Match[str]]:
+def find_uncorrupted_mul_instructions(corrupted_memory: CorruptedMemory) -> Iterator[Match[str]]:
     """Find all valid mul instructions in a possibly-corrupted memory string."""
     return finditer(r"mul\((\d{1,3}),(\d{1,3})\)", corrupted_memory)
 
 
-def parse_mul_instruction_matches(matches: Iterator[Match[str]]) -> list[Instruction]:
+def parse_mul_instruction_matches(instruction_matches: Iterator[Match[str]]) -> list[Instruction]:
     """Parse valid mul instructions so they can be executed."""
-    return [Instruction(match.group(), int(match.group(1)), int(match.group(2))) for match in matches]
+    return [Instruction(match.group(), int(match.group(1)), int(match.group(2))) for match in instruction_matches]
 
 
 def execute_instructions(instructions: list[Instruction]) -> Answer:
@@ -35,7 +36,7 @@ def execute_instructions(instructions: list[Instruction]) -> Answer:
     return sum(instruction.left * instruction.right for instruction in instructions)
 
 
-def solution(input: str) -> int:
+def solution(input: CorruptedMemory) -> Answer:
     return pipe(
         input,
         find_uncorrupted_mul_instructions,
