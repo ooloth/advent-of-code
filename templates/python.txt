@@ -1,4 +1,6 @@
-# Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
+"""
+Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
+"""
 
 from aoc.utils.logs import log
 
