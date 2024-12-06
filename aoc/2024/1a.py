@@ -2,10 +2,14 @@
 Advent of Code 2024, Puzzle 1a: https://adventofcode.com/2024/day/1
 """
 
+HistorianLists = str
+LocationId = int
+TotalDistance = int
 
-def solution(input: str) -> int:
-    left_list: list[int] = []
-    right_list: list[int] = []
+
+def solution(input: HistorianLists) -> TotalDistance:
+    left_list: list[LocationId] = []
+    right_list: list[LocationId] = []
 
     for line in input.splitlines():
         location_ids = [int(x) for x in line.split()]
@@ -19,13 +23,13 @@ def solution(input: str) -> int:
 
 
 def test_solution() -> None:
-    example_input = """3   4
+    example_input: HistorianLists = """3   4
 4   3
 2   5
 1   3
 3   9
 3   3"""
-    example_answer = 11
+    example_answer: TotalDistance = 11
 
     assert solution(example_input) == example_answer
 
