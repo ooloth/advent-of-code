@@ -7,7 +7,7 @@ export MYPYPATH="$PWD"
 export PYTHONPATH="$PWD"
 
 # Advent of Code options
-export AOC_YEAR=2015
+export AOC_YEAR=2024
 export AOC_LANGUAGE=python
 export AOC_SESSION_FILE="$PWD/.aoc-session-cookie"
 
@@ -17,8 +17,12 @@ export AOC_PUZZLES="aoc/$AOC_YEAR/puzzles"
 export AOC_SOLUTIONS="aoc/$AOC_YEAR"
 
 case "$AOC_LANGUAGE" in
-  python) export AOC_LANGUAGE_EXTENSION=py ;;
-  typescript) export AOC_LANGUAGE_EXTENSION=ts ;;
+python) export AOC_LANGUAGE_EXTENSION=py ;;
+typescript) export AOC_LANGUAGE_EXTENSION=ts ;;
+*)
+  echo "🚨 Unsupported language: $AOC_LANGUAGE"
+  exit 1
+  ;;
 esac
 
 ##############
@@ -30,9 +34,11 @@ vars=("AOC_YEAR" "AOC_LANGUAGE" "AOC_LANGUAGE_EXTENSION" "AOC_INPUTS" "AOC_PUZZL
 # Confirm all variables are set
 validate_required_vars() {
   local required_vars=("$@")
+
   for required_var in "${required_vars[@]}"; do
     if [ -z "${!required_var}" ]; then
-      echo "🚨 $required_var is not set"; exit 1
+      echo "🚨 $required_var is not set"
+      exit 1
     fi
   done
 }
@@ -41,17 +47,20 @@ validate_required_vars "${vars[@]}"
 
 # AOC_YEAR must be 2015-2024
 if ! [[ "$AOC_YEAR" =~ ^[0-9]{4}$ ]] || [[ "$AOC_YEAR" -lt 2015 ]] || [[ "$AOC_YEAR" -gt 2024 ]]; then
-  echo "🚨 AOC_YEAR must be a year between 2015-2024"; exit 1
+  echo "🚨 AOC_YEAR must be a year between 2015-2024"
+  exit 1
 fi
 
 # AOC_LANGUAGE must be a supported language
 if [[ "$AOC_LANGUAGE" != "python" ]] && [[ "$AOC_LANGUAGE" != "typescript" ]]; then
-  echo "🚨 AOC_LANGUAGE must be 'python' or 'typescript'; got '$AOC_LANGUAGE'"; exit 1
+  echo "🚨 AOC_LANGUAGE must be 'python' or 'typescript'; got '$AOC_LANGUAGE'"
+  exit 1
 fi
 
 # AOC_LANGUAGE_EXTENSION must be a supported language extension
 if [[ "$AOC_LANGUAGE_EXTENSION" != "py" ]] && [[ "$AOC_LANGUAGE_EXTENSION" != "ts" ]]; then
-  echo "🚨 AOC_LANGUAGE_EXTENSION must be 'py' or 'ts'; got '$AOC_LANGUAGE_EXTENSION'"; exit 1
+  echo "🚨 AOC_LANGUAGE_EXTENSION must be 'py' or 'ts'; got '$AOC_LANGUAGE_EXTENSION'"
+  exit 1
 fi
 
 inspect_vars() {
