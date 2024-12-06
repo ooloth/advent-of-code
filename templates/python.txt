@@ -4,19 +4,27 @@ Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{
 
 from aoc.utils.logs import log
 
+Input = str  # TODO: give domain-specific name
+Answer = int  # TODO: give domain-specific name
 
-def solution(input: str) -> int | None:
+
+def solution(input: Input) -> Answer:
     log(input)
 
     # df = pd.read_csv(io.StringIO(input), header=None)
     for line in input.splitlines():
         ...
 
-    return None
+    return len(input)
 
 
 def test_solution() -> None:
-    examples: list[tuple[str, int]] = [
+    example_input: Input = """"""
+    example_answer: Answer = 0
+
+    assert solution(example_input) == example_answer
+
+    examples: list[tuple[Input, Answer]] = [
         ("a", 1),
         ("ab", 2),
         ("abc", 3),
