@@ -7,6 +7,7 @@ dependencies = [
   "expression>=5.3.0",
   "mypy>=1.12.0",
   "pandas>=2.2.3",
+  "pytest-watcher>=0.4.3",
   "pytest>=8.3.3",
   "rich>=13.9.3",
   "ruff>=0.6.9",
@@ -15,7 +16,17 @@ dependencies = [
 # see: https://docs.pytest.org/en/stable/reference/customize.html
 [tool.pytest.ini_options]
 python_files = "*.py" # find tests in solution files
-testpaths = ["solutions"] # only traverse the solutions directory
+testpaths = ["aoc"] # only traverse the solutions directory
+
+# see: https://github.com/olzhasar/pytest-watcher?tab=readme-ov-file#available-options
+[tool.pytest-watcher]
+now = true
+clear = false
+delay = 0.2
+runner = "pytest"
+runner_args = []
+patterns = ["*.py"]
+ignore_patterns = []
 
 [tool.ruff]
 line-length = 120
