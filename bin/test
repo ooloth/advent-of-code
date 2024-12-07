@@ -16,14 +16,15 @@ source "$current_dir/env"
 solution_path_without_extension="$AOC_SOLUTIONS/$1"
 
 case "$AOC_LANGUAGE" in
-  python)
-    pytest "$solution_path_without_extension.py" ;;
-    # pytest "aoc/$AOC_YEAR/python/$1.py" ;;
-  typescript)
-    # see: https://docs.deno.com/runtime/fundamentals/testing/
-    deno test "$solution_path_without_extension.ts" ;;
-    # deno run --allow-env --allow-read "aoc/utils/typescript/run.ts" "$@" ;;
-  *)
-    echo "Unsupported language: $AOC_LANGUAGE"
-    exit 1 ;;
+python)
+  ptw "$solution_path_without_extension.py"
+  ;;
+typescript)
+  # see: https://docs.deno.com/runtime/fundamentals/testing/
+  deno test "$solution_path_without_extension.ts"
+  ;;
+*)
+  echo "Unsupported language: $AOC_LANGUAGE"
+  exit 1
+  ;;
 esac
