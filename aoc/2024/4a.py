@@ -15,12 +15,12 @@ def parse_grid(input: WordSearch) -> Grid:
     return [[char for char in line] for line in input.splitlines()]
 
 
-def check_xmas(grid: Grid, x: int, y: int, dx: int, dy: int) -> bool:
+def spells_xmas(grid: Grid, x: int, y: int, dx: int, dy: int) -> bool:
     """Check if 'XMAS' occurs starting from (x, y) in the direction (dx, dy)."""
-    s_would_be_outside_row = y + dy * 3 < 0 or y + dy * 3 >= len(grid)
-    s_would_be_outside_col = x + dx * 3 < 0 or x + dx * 3 >= len(grid[0])
+    s_would_be_outside_grid_horizontally = x + dx * 3 < 0 or x + dx * 3 >= len(grid[0])
+    s_would_be_outside_grid_vertically = y + dy * 3 < 0 or y + dy * 3 >= len(grid)
 
-    if s_would_be_outside_row or s_would_be_outside_col:
+    if s_would_be_outside_grid_horizontally or s_would_be_outside_grid_vertically:
         return False
 
     return (
@@ -54,7 +54,7 @@ def count_xmas_occurrences(grid: Grid) -> XmasOccurrences:
         for x in range(col_count):
             if grid[y][x] == "X":
                 for dx, dy in directions:
-                    if check_xmas(grid, x, y, dx, dy):
+                    if spells_xmas(grid, x, y, dx, dy):
                         xmas_count += 1
 
     return xmas_count
