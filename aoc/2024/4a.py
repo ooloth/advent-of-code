@@ -15,12 +15,12 @@ def parse_grid(input: WordSearch) -> Grid:
     return [[char for char in line] for line in input.splitlines()]
 
 
-def check_xmas(grid: list[list[str]], x: int, y: int, dx: int, dy: int) -> bool:
+def check_xmas(grid: Grid, x: int, y: int, dx: int, dy: int) -> bool:
     """Check if 'XMAS' occurs starting from (x, y) in the direction (dx, dy)."""
-    would_be_out_of_row_bounds = y + dy * 3 < 0 or y + dy * 3 >= len(grid)
-    would_be_out_of_col_bounds = x + dx * 3 < 0 or x + dx * 3 >= len(grid[0])
+    s_would_be_outside_row = y + dy * 3 < 0 or y + dy * 3 >= len(grid)
+    s_would_be_outside_col = x + dx * 3 < 0 or x + dx * 3 >= len(grid[0])
 
-    if would_be_out_of_row_bounds or would_be_out_of_col_bounds:
+    if s_would_be_outside_row or s_would_be_outside_col:
         return False
 
     return (
@@ -31,10 +31,8 @@ def check_xmas(grid: list[list[str]], x: int, y: int, dx: int, dy: int) -> bool:
     )
 
 
-def count_xmas_occurrences(grid: list[list[str]]) -> int:
+def count_xmas_occurrences(grid: Grid) -> XmasOccurrences:
     """Count the number of times 'XMAS' occurs in a 2D grid of characters."""
-    row_count = len(grid)
-    col_count = len(grid[0])
 
     # Define directions as (dx, dy) tuples
     directions = [
@@ -48,6 +46,8 @@ def count_xmas_occurrences(grid: list[list[str]]) -> int:
         (-1, -1),  # Up-left
     ]
 
+    row_count = len(grid)
+    col_count = len(grid[0])
     xmas_count = 0
 
     for y in range(row_count):
