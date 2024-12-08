@@ -1,6 +1,4 @@
-"""
-Advent of Code 2024, Puzzle 5a: https://adventofcode.com/2024/day/5
-"""
+"""Advent of Code 2024, Puzzle 5a: https://adventofcode.com/2024/day/5"""
 
 PageOrderingRulesAndPageNumbersInEachUpdate = str
 PageOrderingRules = dict[str, list[str]]

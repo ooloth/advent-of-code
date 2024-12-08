@@ -1,6 +1,4 @@
-"""
-Advent of Code 2024, Puzzle 1b: https://adventofcode.com/2024/day/1
-"""
+"""Advent of Code 2024, Puzzle 1b: https://adventofcode.com/2024/day/1"""
 
 HistorianLists = str
 LocationId = int

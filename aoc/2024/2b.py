@@ -1,6 +1,4 @@
-"""
-Advent of Code 2024, Puzzle 2b: https://adventofcode.com/2024/day/2
-"""
+"""Advent of Code 2024, Puzzle 2b: https://adventofcode.com/2024/day/2"""
 
 from expression import pipe
 

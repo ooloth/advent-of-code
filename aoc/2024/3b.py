@@ -1,6 +1,4 @@
-"""
-Advent of Code 2024, Puzzle 3b: https://adventofcode.com/2024/day/3
-"""
+"""Advent of Code 2024, Puzzle 3b: https://adventofcode.com/2024/day/3"""
 
 from dataclasses import dataclass
 from re import Match, finditer

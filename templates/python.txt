@@ -1,6 +1,4 @@
-"""
-Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}
-"""
+"""Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}"""
 
 from aoc.utils.logs import log
 
@@ -9,7 +7,7 @@ Answer = int  # TODO: give domain-specific name
 
 
 def solution(input: Input) -> Answer:
-    log(input)
+    log(f"{input=}")
 
     # df = pd.read_csv(io.StringIO(input), header=None)
     for line in input.splitlines():
