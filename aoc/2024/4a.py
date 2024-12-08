@@ -17,15 +17,18 @@ def parse_grid(input: WordSearch) -> Grid:
 
 def check_xmas(grid: list[list[str]], x: int, y: int, dx: int, dy: int) -> bool:
     """Check if 'XMAS' occurs starting from (x, y) in the direction (dx, dy)."""
-    try:
-        return (
-            grid[y][x] == "X"
-            and grid[y + dy][x + dx] == "M"
-            and grid[y + dy * 2][x + dx * 2] == "A"
-            and grid[y + dy * 3][x + dx * 3] == "S"
-        )
-    except IndexError:
+    would_be_out_of_row_bounds = y + dy * 3 < 0 or y + dy * 3 >= len(grid)
+    would_be_out_of_col_bounds = x + dx * 3 < 0 or x + dx * 3 >= len(grid[0])
+
+    if would_be_out_of_row_bounds or would_be_out_of_col_bounds:
         return False
+
+    return (
+        grid[y][x] == "X"
+        and grid[y + dy][x + dx] == "M"
+        and grid[y + dy * 2][x + dx * 2] == "A"
+        and grid[y + dy * 3][x + dx * 3] == "S"
+    )
 
 
 def count_xmas_occurrences(grid: list[list[str]]) -> int:
@@ -76,7 +79,7 @@ SMSMSASXSS
 SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX"""
-    example_answer: XmasOccurrences = 19  # instructions incorrectly say 18, but answer that produces 19 is correct
+    example_answer: XmasOccurrences = 18
 
     assert solution(example_input) == example_answer
 
