@@ -17,7 +17,7 @@ solution_path_without_extension="$AOC_SOLUTIONS/$1"
 
 case "$AOC_LANGUAGE" in
 python)
-  ptw "$solution_path_without_extension.py"
+  ptw "$solution_path_without_extension.py" "$solution_path_without_extension.py"
   ;;
 typescript)
   # see: https://docs.deno.com/runtime/fundamentals/testing/
