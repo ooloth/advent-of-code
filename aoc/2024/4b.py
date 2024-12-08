@@ -15,10 +15,10 @@ def parse_grid(input: WordSearch) -> Grid:
 
 def is_mas_cross(grid: Grid, x: int, y: int) -> bool:
     """Check if a crossed 'MAS' occurs starting from an A at (x, y) in the direction (dx, dy)."""
-    cross_would_be_outside_grid_horizontally = x == 0 or x == len(grid[0]) - 1
-    cross_would_be_outside_grid_vertically = y == 0 or y == len(grid) - 1
+    would_be_outside_grid_horizontally = x == 0 or x == len(grid[0]) - 1
+    would_be_outside_grid_vertically = y == 0 or y == len(grid) - 1
 
-    if cross_would_be_outside_grid_horizontally or cross_would_be_outside_grid_vertically:
+    if would_be_outside_grid_horizontally or would_be_outside_grid_vertically:
         return False
 
     up_left = grid[y - 1][x - 1]
