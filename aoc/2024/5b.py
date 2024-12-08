@@ -1,16 +1,17 @@
 """
-Advent of Code 2024, Puzzle 5a: https://adventofcode.com/2024/day/5
+Advent of Code 2024, Puzzle 5b: https://adventofcode.com/2024/day/5
 """
 
 PageOrderingRulesAndPageNumbersInEachUpdate = str
 PageOrderingRules = dict[str, list[str]]
 PageNumbersInUpdate = list[str]
-SumOfMiddlePageNumbersInCorrectlyOrderedUpdates = int
+SumOfMiddlePageNumbersInReorderedUpdates = int
 
 
 def parse_rules_and_updates(
     input: PageOrderingRulesAndPageNumbersInEachUpdate,
 ) -> tuple[PageOrderingRules, list[PageNumbersInUpdate]]:
+    """Same as 5a."""
     rules: PageOrderingRules = {}
     updates: list[PageNumbersInUpdate] = []
 
@@ -31,10 +32,7 @@ def parse_rules_and_updates(
 
 
 def is_correctly_ordered(update: PageNumbersInUpdate, rules: PageOrderingRules) -> bool:
-    """
-    If an update includes a page number referenced by a rule, the rule page must come before it in the update
-    (though not necessarily immediately before it).
-    """
+    """Same as 5a."""
     for i, page in enumerate(update):
         for page_that_must_come_after in rules.get(page, []):
             if page_that_must_come_after in update[:i]:
@@ -42,14 +40,37 @@ def is_correctly_ordered(update: PageNumbersInUpdate, rules: PageOrderingRules) 
     return True
 
 
+def reorder_update(update: PageNumbersInUpdate, rules: PageOrderingRules) -> PageNumbersInUpdate:
+    """Reorder the update so that all pages that must come after a page come after it."""
+    reordered_update: PageNumbersInUpdate = update
+
+    for i, page in enumerate(update):
+        for page_that_must_come_after in rules.get(page, []):
+            if page_that_must_come_after in update[:i]:
+                reordered_update.remove(page_that_must_come_after)
+                reordered_update.append(page_that_must_come_after)
+
+    assert len(reordered_update) == len(update), "Reordering should not change the number of pages"
+
+    if not is_correctly_ordered(reordered_update, rules):
+        return reorder_update(reordered_update, rules)
+
+    return reordered_update
+
+
 def middle_page_number(update: PageNumbersInUpdate) -> int:
+    """Same as 5a."""
     return int(update[len(update) // 2])
 
 
-def solution(input: PageOrderingRulesAndPageNumbersInEachUpdate) -> SumOfMiddlePageNumbersInCorrectlyOrderedUpdates:
+def solution(input: PageOrderingRulesAndPageNumbersInEachUpdate) -> SumOfMiddlePageNumbersInReorderedUpdates:
     rules, updates = parse_rules_and_updates(input)
 
-    return sum(middle_page_number(update) for update in updates if is_correctly_ordered(update, rules))
+    return sum(
+        middle_page_number(reorder_update(update, rules))
+        for update in updates
+        if not is_correctly_ordered(update, rules)
+    )
 
 
 def test_solution() -> None:
@@ -81,7 +102,7 @@ def test_solution() -> None:
 75,97,47,61,53
 61,13,29
 97,13,75,29,47"""
-    example_answer: SumOfMiddlePageNumbersInCorrectlyOrderedUpdates = 143
+    example_answer: SumOfMiddlePageNumbersInReorderedUpdates = 123
 
     assert solution(example_input) == example_answer
 
