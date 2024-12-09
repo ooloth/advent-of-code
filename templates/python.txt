@@ -1,35 +1,36 @@
 """Advent of Code {year}, Puzzle {day}{part}: https://adventofcode.com/{year}/day/{day}"""
 
+from expression import pipe
+
 from aoc.utils.logs import log
 
 Input = str  # TODO: give domain-specific name
 Answer = int  # TODO: give domain-specific name
 
 
-def solution(input: Input) -> Answer:
+def parse_whatever(input: str) -> Input:
     log(f"{input=}")
+    return input
 
-    # df = pd.read_csv(io.StringIO(input), header=None)
-    for line in input.splitlines():
-        ...
 
-    return len(input)
+def do_whatever(input: Input) -> Input:
+    return input
+
+
+def solution(input: Input) -> Answer:
+    return pipe(
+        input,
+        parse_whatever,
+        do_whatever,
+        len,
+    )
 
 
 def test_solution() -> None:
     example_input: Input = """"""
-    example_answer: Answer = 0
+    example_answer: Answer = -1
 
     assert solution(example_input) == example_answer
-
-    examples: list[tuple[Input, Answer]] = [
-        ("a", 1),
-        ("ab", 2),
-        ("abc", 3),
-    ]
-
-    for input, expected in examples:
-        assert solution(input) == expected
 
 
 if __name__ == "__main__":
