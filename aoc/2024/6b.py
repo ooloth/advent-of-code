@@ -75,11 +75,13 @@ def detect_infinite_loop(grid: Grid) -> bool:
 
         visited.add(((x, y), direction))
 
+        next_position = move(x, y, direction)
+
         # If the guard will escape the grid on his next move, he's not in an infinite loop
-        if is_out_of_bounds(*move(x, y, direction), grid):
+        if is_out_of_bounds(*next_position, grid):
             return False
 
-        if is_obstruction(*move(x, y, direction), grid):
+        if is_obstruction(*next_position, grid):
             direction = turn_right(direction)
             continue
 
