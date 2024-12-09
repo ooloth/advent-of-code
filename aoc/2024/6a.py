@@ -78,6 +78,7 @@ def walk_map_and_track_positions_visited(grid: Grid) -> set[Position]:
 
         if is_obstruction(*next_position, grid):
             direction = turn_right(direction)
+            continue
 
         x, y = move(x, y, direction)
 
