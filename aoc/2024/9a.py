@@ -15,11 +15,19 @@ def parse_disk_map(input: str) -> DiskMap:
     """
     disk_map: DiskMap = []
 
+    def file_block(index: int, char: str) -> list[int]:
+        """Repeat the file's ID char times."""
+        return [int(index / 2)] * int(char)
+
+    def free_space(char: str) -> list[Literal["."]]:
+        """Repeat "." char times."""
+        return ["."] * int(char)
+
     for index, char in enumerate(input):
         if index % 2 == 0:
-            disk_map += [int(index / 2)] * int(char)  # Add char char times
+            disk_map += file_block(index, char)
         else:
-            disk_map += ["."] * int(char)  # Add "." char times
+            disk_map += free_space(char)
 
     return disk_map
 
@@ -56,6 +64,7 @@ def compact_file_blocks(disk_map: DiskMap) -> DiskMap:
 
 
 def multiply_block_ids_and_positions(disk_map: DiskMap) -> list[int]:
+    """Multiply the block ID by its position in the disk map to calculate the checksum components."""
     return [char * index for index, char in enumerate(disk_map) if char != "."]
 
 
