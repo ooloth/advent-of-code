@@ -4,11 +4,11 @@ from expression import pipe
 
 from aoc.utils.logs import log
 
-Input = str  # TODO: give domain-specific name
+ParsedInput = str  # TODO: give domain-specific name
 Answer = int  # TODO: give domain-specific name
 
 
-def parse_whatever(input: str) -> Input:
+def parse_whatever(input: str) -> ParsedInput:
     log(f"{input=}")
     return input
 
@@ -27,7 +27,7 @@ def solution(input: Input) -> Answer:
 
 
 def test_solution() -> None:
-    example_input: Input = """"""
+    example_input: str = """"""
     example_answer: Answer = -1
 
     assert solution(example_input) == example_answer
