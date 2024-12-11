@@ -3,6 +3,7 @@
 from expression import pipe
 
 TrailMap = list[list[int]]
+Coordinates = tuple[int, int]
 SumOfTrailheadScores = int
 
 
@@ -16,7 +17,13 @@ def is_out_of_bounds(x: int, y: int, map: TrailMap) -> bool:
     return x < 0 or x >= len(map[0]) or y < 0 or y >= len(map)
 
 
-def walk_trail(map: TrailMap, x: int, y: int, height: int, visited: set[tuple[int, int]]) -> int:
+def walk_trail(
+    map: TrailMap,
+    x: int,
+    y: int,
+    height: int,
+    visited: set[Coordinates],
+) -> int:
     """Walk a hiking trail and return the number of 9-height positions reachable from the trailhead."""
     if is_out_of_bounds(x, y, map):
         return 0
