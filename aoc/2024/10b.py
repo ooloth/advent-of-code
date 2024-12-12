@@ -8,7 +8,7 @@ Path = tuple[Coordinates, ...]
 SumOfTrailheadRatings = int
 
 
-def parse_topographic_map(input: str) -> TrailMap:
+def parse_trail_map(input: str) -> TrailMap:
     """Same as 10a."""
     return [[int(num) for num in line] for line in input.splitlines()]
 
@@ -58,7 +58,7 @@ def compute_trailhead_ratings(map: TrailMap) -> set[Path]:
 def solution(input: str) -> SumOfTrailheadRatings:
     return pipe(
         input,
-        parse_topographic_map,
+        parse_trail_map,
         compute_trailhead_ratings,
         len,
     )
