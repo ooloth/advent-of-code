@@ -7,7 +7,7 @@ Coordinates = tuple[int, int]
 SumOfTrailheadScores = int
 
 
-def parse_topographic_map(input: str) -> TrailMap:
+def parse_trail_map(input: str) -> TrailMap:
     """Parse multiline string map into a 2D grid of hiking trails."""
     return [[int(num) for num in line] for line in input.splitlines()]
 
@@ -44,13 +44,13 @@ def walk_trail(
 
 def compute_trailhead_scores(map: TrailMap) -> list[int]:
     """Count the number of 9-height positions reachable from each 0-height trailhead."""
-    return [walk_trail(map, x, y, 0, set()) for y in range(len(map)) for x in range(len(map[0]))]
+    return [walk_trail(map, x, y, 0, set()) for y in range(len(map)) for x in range(len(map[0])) if map[y][x] == 0]
 
 
 def solution(input: str) -> SumOfTrailheadScores:
     return pipe(
         input,
-        parse_topographic_map,
+        parse_trail_map,
         compute_trailhead_scores,
         sum,  # type: ignore
     )
