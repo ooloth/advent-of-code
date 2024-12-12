@@ -13,17 +13,19 @@ def parse_whatever(input: str) -> ParsedInput:
     return input
 
 
-def do_whatever(input: Input) -> Input:
+def do_whatever(input: ParsedInput) -> ParsedInput:
     return input
 
 
-def solution(input: Input) -> Answer:
+def solution(input: ParsedInput) -> Answer:
     return pipe(
         input,
         parse_whatever,
         do_whatever,
         len,
     )
+
+
 
 
 def test_solution() -> None:
