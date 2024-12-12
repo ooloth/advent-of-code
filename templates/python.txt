@@ -26,8 +26,6 @@ def solution(input: ParsedInput) -> Answer:
     )
 
 
-
-
 def test_solution() -> None:
     example_input: str = """"""
     example_answer: Answer = -1
