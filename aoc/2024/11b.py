@@ -7,7 +7,7 @@ from expression import pipe
 
 Stone = int
 StoneCounts = dict[Stone, int]
-NumberOfStonesAfter25Blinks = int
+TotalStoneCount = int
 
 
 def parse_stone_counts(input: str) -> StoneCounts:
@@ -70,7 +70,7 @@ def count_stones(stones: StoneCounts) -> int:
     return sum(stones.values())
 
 
-def solution(input: str) -> NumberOfStonesAfter25Blinks:
+def solution(input: str) -> TotalStoneCount:
     return pipe(
         input,
         parse_stone_counts,
@@ -81,7 +81,7 @@ def solution(input: str) -> NumberOfStonesAfter25Blinks:
 
 def test_solution() -> None:
     example_input: str = """125 17"""
-    example_answer: NumberOfStonesAfter25Blinks = 55312
+    example_answer: TotalStoneCount = 55312
 
     assert solution(example_input) == example_answer
 
