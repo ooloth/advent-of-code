@@ -17,7 +17,7 @@ current_dir=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
 source "$current_dir/validate_args"
 source "$current_dir/env"
 
-day="${1%[ab]}" # strip the "a" or "b" from the end of $1
+day="${1%[ab]}"    # strip the "a" or "b" from the end of $1
 part="${1#"$day"}" # strip the $day from the beginning of $1
 
 function download_description() {
@@ -92,7 +92,7 @@ function create_solution_file() {
   mkdir -p "$(dirname "$abs_path_to_solution")"
 
   # Create a new solution file at $rel_path
-  echo "$content" > "$abs_path_to_solution"
+  echo "$content" >"$abs_path_to_solution"
 
   echo "🎅 Created solution file at '$rel_path_to_solution'"
 }
@@ -118,7 +118,15 @@ function open_files_in_editor() {
   "$EDITOR" "$cmd_options" "$solution_path" "$input_path" "$description_path"
 }
 
+function run_tests() {
+  local day="$1"
+  local part="$2"
+
+  source "$current_dir/test" "$day$part"
+}
+
 download_description "$day"
 download_input "$day"
 create_solution_file "$day" "$part"
 open_files_in_editor "$day" "$part"
+run_tests "$day" "$part"
