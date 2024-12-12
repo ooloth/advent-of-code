@@ -21,8 +21,8 @@ def split_into_two_stones(stone: Stone) -> tuple[Stone, Stone]:
     stone_str = str(stone)
     half_length: int = len(stone_str) // 2
 
-    first_half: Stone = int(stone_str[0:half_length])
-    second_half: Stone = int(stone_str[half_length : half_length * 2])
+    first_half: Stone = int(stone_str[:half_length])
+    second_half: Stone = int(stone_str[half_length:])
 
     return first_half, second_half
 
