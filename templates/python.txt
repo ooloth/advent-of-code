@@ -26,11 +26,11 @@ def solution(input: str) -> Answer:
     )
 
 
-def test_solution() -> None:
-    example_input: str = """"""
-    example_answer: Answer = -1
+def test_example() -> None:
+    input: str = """"""
+    answer: Answer = -1
 
-    assert solution(example_input) == example_answer
+    assert solution(input) == answer
 
 
 if __name__ == "__main__":
