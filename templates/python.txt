@@ -17,7 +17,7 @@ def do_whatever(input: ParsedInput) -> ParsedInput:
     return input
 
 
-def solution(input: ParsedInput) -> Answer:
+def solution(input: str) -> Answer:
     return pipe(
         input,
         parse_whatever,
