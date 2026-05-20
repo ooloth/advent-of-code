@@ -17,9 +17,9 @@ $ bin/submit <day><part> # submit a puzzle answer in the active year
 For example:
 
 ```bash
-$ bin/new 1a # download the 2015, day 1, part 1 puzzle and its input and generate solution files
-$ bin/run 25b # output my 2023, day 25, part 2 answer
-$ bin/submit 25b # submit my 2023, day 25, part 2 answer
+$ bin/new 1a # download the 2024, day 1, part 1 puzzle and its input and generate solution files
+$ bin/run 25b # output my 2024, day 25, part 2 answer
+$ bin/submit 25b # submit my 2024, day 25, part 2 answer
 ```
 
 ## Advent of Code session cookie
