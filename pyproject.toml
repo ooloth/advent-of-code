@@ -1,6 +1,6 @@
 [project]
 name = "advent-of-code"
-description = "My solutions to all years of Advent of Code in Python"
+description = "My solutions to all years of Advent of Code in Python and TypeScript"
 requires-python = ">=3.13"
 version = "0.1.0"
 dependencies = [
