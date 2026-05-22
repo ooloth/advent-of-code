@@ -12,6 +12,7 @@ Update the `AOC_LANGUAGE` and `AOC_YEAR` environment variables in `bin/env` to m
 $ bin/new <day><part> # start a new puzzle in the active year
 $ bin/run <day><part> [--submit] # run a puzzle solution in the active year (pass --submit or -s to also submit the answer)
 $ bin/submit <day><part> # submit a puzzle answer in the active year
+$ bin/test <day><part> # run tests for a puzzle in the active year
 ```
 
 For example:
@@ -21,6 +22,7 @@ $ bin/new 1a # download the 2024, day 1, part 1 puzzle and its input and generat
 $ bin/run 25b # output my 2024, day 25, part 2 answer
 $ bin/run 25b --submit # output and submit my 2024, day 25, part 2 answer
 $ bin/submit 25b # submit my 2024, day 25, part 2 answer
+$ bin/test 1a # run tests for the 2024, day 1, part 1 solution
 ```
 
 ## Advent of Code session cookie
