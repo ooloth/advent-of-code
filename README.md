@@ -2,9 +2,21 @@
 
 Solutions for [Advent of Code](https://adventofcode.com/) puzzles in languages I enjoy.
 
+## Prerequisites
+
+Install these tools before running any `bin/` commands:
+
+- **[uv](https://docs.astral.sh/uv/getting-started/installation/)** — runs Python solutions and dev tools (`uv run ...`)
+- **Python 3.13** — required by `pyproject.toml`; install via `uv python install 3.13`
+- **[aoc-cli](https://github.com/scarvalhojr/aoc-cli)** — required by `bin/new` (download) and `bin/submit` (submission)
+- **[deno](https://docs.deno.com/runtime/getting_started/installation/)** — required only if using `AOC_LANGUAGE=typescript`
+- **`$EDITOR`** — `bin/new` opens scaffolded files in your editor; set `EDITOR` in your shell profile
+
 ## Environment variables
 
 Update the `AOC_LANGUAGE` and `AOC_YEAR` environment variables in `bin/env` to match your preferences. They determine which puzzles to download and which solution files to run and submit.
+
+Note: `AOC_YEAR` is validated to be between 2015 and 2024. Years outside this range will cause all `bin/` commands to exit with an error.
 
 ## Commands
 
